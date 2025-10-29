@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="filename" content="seller_dashboard.html">
+    <title>Plant My Data - Rewards Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .logo i {
+            color: #4a7c59;
+        }
+
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            border: 1px solid #dee2e6;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .logout-btn:hover {
+            background: #f8f9fa;
+            transform: translateY(-1px);
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a:hover {
+            color: #4a7c59;
+        }
+
+        .breadcrumb span {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .page-title-section {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .page-icon {
+            font-size: 2rem;
+            color: #4a7c59;
+            margin-top: 0.25rem;
+        }
+
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .my-redemptions-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            border: 1px solid #dee2e6;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .my-redemptions-btn:hover {
+            background: #f8f9fa;
+            transform: translateY(-1px);
+        }
+
+        .points-section {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .points-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .points-icon {
+            font-size: 1.5rem;
+            color: #4a7c59;
+        }
+
+        .points-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.25rem;
+        }
+
+        .points-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4a7c59;
+        }
+
+        .earn-more-btn {
+            background: #4a7c59;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .earn-more-btn:hover {
+            background: #3d6b4a;
+            transform: translateY(-1px);
+        }
+
+        .filters-section {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .filters-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .filters-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .filter-select {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 0.75rem;
+            font-size: 0.9rem;
+            color: #666;
+            cursor: pointer;
+        }
+
+        .rewards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .reward-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 2rem 1.5rem;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .reward-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .reward-card.placeholder {
+            opacity: 0.6;
+            color: #999;
+        }
+
+        .reward-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .reward-icon {
+            font-size: 2rem;
+            color: #dee2e6;
+            margin-bottom: 1rem;
+        }
+
+        .reward-value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #999;
+            margin-bottom: 0.25rem;
+        }
+
+        .reward-points {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #999;
+        }
+
+        .reward-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #999;
+            margin-bottom: 1rem;
+        }
+
+        .reward-info-icon {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #dee2e6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: #999;
+            margin-bottom: 0.5rem;
+        }
+
+        .reward-status {
+            font-size: 0.85rem;
+            color: #999;
+            margin-bottom: 1rem;
+        }
+
+        .reward-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .reward-tag {
+            background: #f8f9fa;
+            color: #999;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            border: 1px solid #dee2e6;
+        }
+
+        .details-btn {
+            background: #f8f9fa;
+            color: #999;
+            border: 1px solid #dee2e6;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: not-allowed;
+            width: 100%;
+            text-align: center;
+        }
+
+        .active-reward {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .reward-logo {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .reward-details {
+            flex: 1;
+        }
+
+        .reward-header-active {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .reward-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .reward-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .reward-tags-active {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .reward-tag-active {
+            background: #f8f9fa;
+            color: #666;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            border: 1px solid #dee2e6;
+        }
+
+        .reward-expiry {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #666;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .reward-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .action-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .details-btn-active {
+            background: white;
+            color: #333;
+            border: 1px solid #dee2e6;
+        }
+
+        .details-btn-active:hover {
+            background: #f8f9fa;
+        }
+
+        .redeem-btn {
+            background: #4a7c59;
+            color: white;
+            border: none;
+        }
+
+        .redeem-btn:hover {
+            background: #3d6b4a;
+        }
+
+        .reward-offer {
+            background: #e8f5e8;
+            color: #4a7c59;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .reward-cost {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            padding: 2rem 2rem 1rem 2rem;
+            border-bottom: 1px solid #f1f3f4;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #666;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .modal-close:hover {
+            background: #f8f9fa;
+            color: #333;
+        }
+
+        .modal-reward-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-reward-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: white;
+        }
+
+        .modal-reward-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .modal-reward-subtitle {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .modal-tabs {
+            display: flex;
+            border-bottom: 1px solid #f1f3f4;
+            background: #f8f9fa;
+        }
+
+        .modal-tab {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+            border: none;
+            background: none;
+            transition: all 0.2s;
+        }
+
+        .modal-tab.active {
+            color: #333;
+            background: white;
+            border-bottom: 2px solid #4a7c59;
+        }
+
+        .modal-content {
+            padding: 2rem;
+        }
+
+        .modal-tab-content {
+            display: none;
+        }
+
+        .modal-tab-content.active {
+            display: block;
+        }
+
+        .modal-section {
+            margin-bottom: 2rem;
+        }
+
+        .modal-section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #333;
+        }
+
+        .modal-section-text {
+            color: #666;
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+
+        .modal-cost {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-cost-label {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-cost-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4a7c59;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            padding: 1.5rem 2rem 2rem 2rem;
+            border-top: 1px solid #f1f3f4;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            text-align: center;
+        }
+
+        .modal-btn-cancel {
+            background: white;
+            color: #666;
+            border: 1px solid #dee2e6;
+        }
+
+        .modal-btn-cancel:hover {
+            background: #f8f9fa;
+        }
+
+        .modal-btn-redeem {
+            background: #4a7c59;
+            color: white;
+        }
+
+        .modal-btn-redeem:hover {
+            background: #3d6b4a;
+        }
+
+        /* Code Modal Styles */
+        .code-modal {
+            background: white;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .code-modal-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #f1f3f4;
+            position: relative;
+        }
+
+        .code-modal-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .code-modal-subtitle {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .code-modal-content {
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .code-reward-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            margin: 0 auto 1.5rem auto;
+        }
+
+        .code-reward-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .code-reward-discount {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #4a7c59;
+            margin-bottom: 2rem;
+        }
+
+        .discount-code {
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: #333;
+            margin-bottom: 2rem;
+        }
+
+        .code-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .code-btn {
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            border: none;
+        }
+
+        .copy-btn {
+            background: #4a7c59;
+            color: white;
+        }
+
+        .copy-btn:hover {
+            background: #3d6b4a;
+        }
+
+        .copy-btn.copied {
+            background: #28a745;
+        }
+
+        .website-btn {
+            background: white;
+            color: #333;
+            border: 1px solid #dee2e6;
+        }
+
+        .website-btn:hover {
+            background: #f8f9fa;
+        }
+
+        .save-btn {
+            background: white;
+            color: #666;
+            border: 1px solid #dee2e6;
+        }
+
+        .save-btn:hover {
+            background: #f8f9fa;
+        }
+
+        .restore-info {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .restore-icon {
+            color: #856404;
+            font-size: 1.25rem;
+            margin-top: 0.1rem;
+        }
+
+        .restore-text {
+            color: #856404;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .restore-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .no-bank-text {
+            color: #999;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        @media (max-width: 1200px) {
+            .rewards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .rewards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filters-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .points-section {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .active-reward {
+                flex-direction: column;
+            }
+            
+            .reward-actions {
+                flex-direction: column;
+            }
+
+            .modal {
+                width: 95%;
+                margin: 1rem;
+            }
+
+            .modal-header {
+                padding: 1.5rem;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+            }
+
+            .modal-actions {
+                padding: 1.5rem;
+                flex-direction: column;
+            }
+
+            .modal-tabs {
+                flex-wrap: wrap;
+            }
+
+            .modal-tab {
+                min-width: 50%;
+            }
+
+            .code-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .code-modal-content {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <div class="logo">
+                    <i class="fas fa-seedling"></i>
+                    Plant My Data
+                </div>
+            </div>
+            <a href="home.html" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                Log out
+            </a>
+        </div>
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="seller_dashboard.html">Dashboard</a>
+            <span>></span>
+            <span>Rewards</span>
+        </div>
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="page-title-section">
+                <i class="fas fa-gift page-icon"></i>
+                <div>
+                    <h1 class="page-title">Rewards</h1>
+                    <p class="page-subtitle">Redeem gift cards or coupons. No bank details needed.</p>
+                </div>
+            </div>
+            <a href="history.html" class="my-redemptions-btn">
+                <i class="fas fa-history"></i>
+                My Redemptions
+            </a>
+        </div>
+
+        <!-- Available Points -->
+        <div class="points-section">
+            <div class="points-info">
+                <i class="fas fa-coins points-icon"></i>
+                <div>
+                    <div class="points-label">Available Points:</div>
+                    <div class="points-value">300</div>
+                </div>
+            </div>
+            <a href="upload.html" class="earn-more-btn">Earn More</a>
+        </div>
+
+        <!-- Filters -->
+        <div class="filters-section">
+            <div class="filters-header">
+                <i class="fas fa-filter"></i>
+                Filters
+            </div>
+            <div class="filters-grid">
+                <div class="filter-group">
+                    <label class="filter-label">Type</label>
+                    <select class="filter-select">
+                        <option>All Types</option>
+                        <option>Gift Cards</option>
+                        <option>Coupons</option>
+                        <option>Cash Back</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Category</label>
+                    <select class="filter-select">
+                        <option>All Categories</option>
+                        <option>Pharmacy</option>
+                        <option>Retail</option>
+                        <option>Food & Dining</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Sort</label>
+                    <select class="filter-select">
+                        <option>Value</option>
+                        <option>Points Required</option>
+                        <option>Expiry Date</option>
+                        <option>Popularity</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rewards Grid -->
+        <div class="rewards-grid">
+            <!-- JB Hi-Fi Card -->
+            <div class="reward-card placeholder">
+                <div class="reward-header">
+                    <div>
+                        <div class="reward-value">$25 e-gift</div>
+                        <div class="reward-points">2,500 pts</div>
+                    </div>
+                    <div class="reward-icon">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                </div>
+                <div class="reward-name">JB Hi-Fi</div>
+                <div class="reward-info-icon">i</div>
+                <div class="reward-status">Need 2,200 more points</div>
+                <div class="reward-tags">
+                    <span class="reward-tag">Tech</span>
+                    <span class="reward-tag">NZ</span>
+                </div>
+                <button class="details-btn">Details</button>
+            </div>
+
+            <!-- Uber Eats Card -->
+            <div class="reward-card placeholder">
+                <div class="reward-header">
+                    <div>
+                        <div class="reward-value">$15 e-gift </div>
+                        <div class="reward-points">1,500 pts</div>
+                    </div>
+                    <div class="reward-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                </div>
+                <div class="reward-name">Uber Eats</div>
+                <div class="reward-info-icon">i</div>
+                <div class="reward-status">Need 1,200 more points</div>
+                <div class="reward-tags">
+                    <span class="reward-tag">Dining</span>
+                    <span class="reward-tag">NZ</span>
+                </div>
+                <button class="details-btn">Details</button>
+            </div>
+
+            <!-- PakSave Card -->
+            <div class="reward-card placeholder">
+                <div class="reward-header">
+                    <div>
+                        <div class="reward-value">$10 e-gift</div>
+                        <div class="reward-points">1,000 pts</div>
+                    </div>
+                    <div class="reward-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </div>
+                <div class="reward-name">PakSave</div>
+                <div class="reward-info-icon">i</div>
+                <div class="reward-status">Need 700 more points</div>
+                <div class="reward-tags">
+                    <span class="reward-tag">Grocery</span>
+                    <span class="reward-tag">NZ</span>
+                </div>
+                <button class="details-btn">Details</button>
+            </div>
+        </div>
+
+        <!-- Active Reward -->
+        <div class="active-reward">
+            <div class="reward-logo">
+                <i class="fas fa-pills"></i>
+            </div>
+            <div class="reward-details">
+                <div class="reward-header-active">
+                    <div>
+                        <div class="reward-offer">5% off</div>
+                        <div class="reward-cost">300 pts</div>
+                    </div>
+                </div>
+                <h3 class="reward-title">Chemist Warehouse</h3>
+                <p class="reward-description">Get 5% off your next purchase at Chemist Warehouse</p>
+                <div class="reward-tags-active">
+                    <span class="reward-tag-active">Pharmacy</span>
+                    <span class="reward-tag-active">NZ</span>
+                </div>
+                <div class="reward-expiry">
+                    <i class="fas fa-calendar"></i>
+                    Valid 14 days
+                </div>
+                <div class="reward-actions">
+                    <a href="#" class="action-btn details-btn-active">Details</a>
+                    <button class="action-btn redeem-btn" onclick="openModal()">Redeem</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Redeem Modal -->
+    <div class="modal-overlay" id="redeemModal">
+        <div class="modal">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeModal()">×</button>
+                <div class="modal-reward-header">
+                    <div class="modal-reward-icon">
+                        <i class="fas fa-pills"></i>
+                    </div>
+                    <div>
+                        <h2 class="modal-reward-title">Chemist Warehouse</h2>
+                        <p class="modal-reward-subtitle">5% off</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-tabs">
+                <button class="modal-tab active" onclick="switchTab('overview')">Overview</button>
+                <button class="modal-tab" onclick="switchTab('usage')">Where to use</button>
+                <button class="modal-tab" onclick="switchTab('terms')">Terms</button>
+                <button class="modal-tab" onclick="switchTab('privacy')">Privacy</button>
+            </div>
+
+            <div class="modal-content">
+                <div class="modal-tab-content active" id="overview">
+                    <div class="modal-section">
+                        <h3 class="modal-section-title">What you get</h3>
+                        <p class="modal-section-text">
+                            You'll receive a single-use code you can apply at checkout on the provider's website.
+                        </p>
+                    </div>
+
+                    <div class="modal-cost">
+                        <div class="modal-cost-label">Cost</div>
+                        <div class="modal-cost-value">300 points</div>
+                    </div>
+
+                    <div class="modal-section">
+                        <h3 class="modal-section-title">How to use</h3>
+                        <p class="modal-section-text">
+                            Get 5% off your next purchase at Chemist Warehouse.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="modal-tab-content" id="usage">
+                    <div class="modal-section">
+                        <h3 class="modal-section-title">Where to use</h3>
+                        <p class="modal-section-text">
+                            This discount code can be used at any Chemist Warehouse store across New Zealand or on their official website. Simply enter the code at checkout to receive your 5% discount.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="modal-tab-content" id="terms">
+                    <div class="modal-section">
+                        <h3 class="modal-section-title">Terms & Conditions</h3>
+                        <p class="modal-section-text">
+                            • Valid for 14 days from redemption<br>
+                            • Single use only<br>
+                            • Cannot be combined with other offers<br>
+                            • Minimum purchase may apply<br>
+                            • Excludes prescription medications
+                        </p>
+                    </div>
+                </div>
+
+                <div class="modal-tab-content" id="privacy">
+                    <div class="modal-section">
+                        <h3 class="modal-section-title">Privacy Information</h3>
+                        <p class="modal-section-text">
+                            Your redemption data is processed securely and only shared with Chemist Warehouse for verification purposes. No personal information is stored or shared beyond what's necessary for the transaction.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-cancel" onclick="closeModal()">Cancel</button>
+                <button class="modal-btn modal-btn-redeem" onclick="showCodeModal()">Redeem now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Code Modal -->
+    <div class="modal-overlay" id="codeModal">
+        <div class="code-modal">
+            <div class="code-modal-header">
+                <button class="modal-close" onclick="closeCodeModal()">×</button>
+                <h2 class="code-modal-title">Your Chemist Warehouse</h2>
+                <p class="code-modal-subtitle">This code is one-time. It expires 11/10/2025.</p>
+            </div>
+
+            <div class="code-modal-content">
+                <div class="code-reward-icon">
+                    <i class="fas fa-pills"></i>
+                </div>
+                <h3 class="code-reward-title">Chemist Warehouse</h3>
+                <div class="code-reward-discount">5% off</div>
+                
+                <div class="discount-code" id="discountCode">CH-WM4L-JZRR-VV1Z</div>
+
+                <div class="code-actions">
+                    <button class="code-btn copy-btn" onclick="copyCode()" id="copyBtn">
+                        <i class="fas fa-copy"></i>
+                        Copy code
+                    </button>
+                    <a href="https://www.chemistwarehouse.co.nz/" target="_blank" class="code-btn website-btn">
+                        <i class="fas fa-external-link-alt"></i>
+                        Open provider website
+                    </a>
+                    <a href="After_redeem.html" class="code-btn save-btn">
+                        Save for later
+                    </a>
+                </div>
+
+                <div class="restore-info">
+                    <i class="fas fa-exclamation-triangle restore-icon"></i>
+                    <div class="restore-text">
+                        <div class="restore-title">Restore available: 09:37</div>
+                        We'll mark this as redeemed when the provider confirms. If you didn't use it, you can restore within 10 min.
+                    </div>
+                </div>
+
+                <p class="no-bank-text">No bank details required.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('redeemModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('redeemModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function showCodeModal() {
+            closeModal();
+            setTimeout(() => {
+                document.getElementById('codeModal').classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }, 100);
+        }
+
+        function closeCodeModal() {
+            document.getElementById('codeModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function switchTab(tabName) {
+            // Remove active class from all tabs
+            document.querySelectorAll('.modal-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.modal-tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        function copyCode() {
+            const codeText = document.getElementById('discountCode').textContent;
+            const copyBtn = document.getElementById('copyBtn');
+            
+            navigator.clipboard.writeText(codeText).then(function() {
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                copyBtn.classList.add('copied');
+                
+                setTimeout(() => {
+                    copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy code';
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+            }).catch(function(err) {
+                console.error('Could not copy text: ', err);
+                // Fallback for browsers that don't support clipboard API
+                const textArea = document.createElement('textarea');
+                textArea.value = codeText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                copyBtn.classList.add('copied');
+                
+                setTimeout(() => {
+                    copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy code';
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        // Close modals when clicking outside
+        document.getElementById('redeemModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        document.getElementById('codeModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeCodeModal();
+            }
+        });
+
+        // Close modals with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+                closeCodeModal();
+            }
+        });
+    </script>
+</body>
+</html>

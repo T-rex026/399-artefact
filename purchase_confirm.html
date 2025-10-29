@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="filename" content="purchase-confirmation.html">
+    <title>Purchase Confirmation - Plant My Data</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f8fafc;
+            color: #374151;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 60rem;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header {
+            background-color: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1rem 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #059669;
+            text-decoration: none;
+        }
+
+        .logo i {
+            font-size: 1.5rem;
+        }
+
+        .breadcrumb {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #6b7280;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .back-btn:hover {
+            color: #059669;
+        }
+
+        .main-content {
+            padding: 3rem 0;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: #6b7280;
+            font-size: 1rem;
+        }
+
+        .content-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-subtitle {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .dataset-info h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+
+        .dataset-info p {
+            color: #6b7280;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        .price-info {
+            text-align: right;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #7c3aed;
+        }
+
+        .price-currency {
+            color: #9ca3af;
+            font-size: 0.875rem;
+            margin-left: 0.25rem;
+        }
+
+        .dataset-details {
+            background: #f9fafb;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .detail-icon {
+            color: #9ca3af;
+            font-size: 0.75rem;
+        }
+
+        .pricing-breakdown {
+            border-top: 1px solid #e5e7eb;
+            padding-top: 1.5rem;
+        }
+
+        .pricing-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .pricing-row:last-child {
+            margin-bottom: 0;
+            padding-top: 0.75rem;
+            border-top: 1px solid #e5e7eb;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .total-amount {
+            color: #7c3aed;
+            font-size: 1.125rem;
+        }
+
+        .agreement-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .agreement-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f9fafb;
+            border-radius: 0.5rem;
+        }
+
+        .agreement-icon {
+            color: #6b7280;
+            font-size: 1.25rem;
+            margin-top: 0.125rem;
+        }
+
+        .agreement-content h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 0.25rem;
+        }
+
+        .agreement-content p {
+            font-size: 0.875rem;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        .checkbox-group {
+            margin-bottom: 1rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .checkbox {
+            width: 1rem;
+            height: 1rem;
+            border: 2px solid #d1d5db;
+            border-radius: 0.25rem;
+            margin-top: 0.125rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .checkbox.checked {
+            background-color: #059669;
+            border-color: #059669;
+            position: relative;
+        }
+
+        .checkbox.checked::after {
+            content: '✓';
+            color: white;
+            font-size: 0.75rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .checkbox-label {
+            font-size: 0.875rem;
+            color: #374151;
+            cursor: pointer;
+        }
+
+        .checkbox-label a {
+            color: #059669;
+            text-decoration: none;
+        }
+
+        .checkbox-label a:hover {
+            text-decoration: underline;
+        }
+
+        .warning {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: #92400e;
+        }
+
+        .warning-icon {
+            color: #f59e0b;
+        }
+
+        .payment-method {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: #f9fafb;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .payment-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .payment-icon {
+            font-size: 1.5rem;
+            color: #6b7280;
+        }
+
+        .payment-details h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 0.25rem;
+        }
+
+        .payment-details p {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .change-btn {
+            color: #059669;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .change-btn:hover {
+            text-decoration: underline;
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.875rem 2rem;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+            cursor: pointer;
+        }
+
+        .btn-cancel {
+            background: white;
+            color: #6b7280;
+            border-color: #d1d5db;
+        }
+
+        .btn-cancel:hover {
+            background: #f9fafb;
+            border-color: #9ca3af;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #a855f7, #7c3aed);
+            color: white;
+            border-color: #7c3aed;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 25px rgba(124, 58, 237, 0.3);
+        }
+
+        .security-notice {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .security-icon {
+            color: #059669;
+            font-size: 1.25rem;
+        }
+
+        .security-text {
+            font-size: 0.875rem;
+            color: #065f46;
+        }
+
+        @media (max-width: 768px) {
+            html {
+                font-size: 14px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <a href="buyer_dashboard.html" class="logo">
+                        <i class="fas fa-leaf"></i>
+                        Plant My Data
+                    </a>
+                    <span class="breadcrumb">Purchase Confirmation</span>
+                </div>
+                <a href="buyer_dashboard.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Marketplace
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <h1 class="page-title">Confirm Your Purchase</h1>
+                <p class="page-subtitle">Review the dataset details and agree to the terms before completing your purchase.</p>
+            </div>
+
+            <div class="content-grid">
+                <div class="card">
+                    <h2 class="card-title">Order Summary</h2>
+                    <p class="card-subtitle">Dataset details and pricing</p>
+
+                    <div class="order-header">
+                        <div class="dataset-info">
+                            <h3>Grocery Shopping Receipts <strong>Retail</strong></h3>
+                            <p>Anonymous User Pool (245 sellers)<br>
+                            Aggregated grocery receipt data from NZ households. Includes product categories, spending patterns, and shopping frequency.</p>
+                        </div>
+                        <div class="price-info">
+                            <div class="price">$75<span class="price-currency">USD</span></div>
+                        </div>
+                    </div>
+
+                    <div class="dataset-details">
+                        <div class="details-grid">
+                            <div class="detail-item">
+                                <i class="fas fa-users detail-icon"></i>
+                                Cohort: NZ • Age 25-45 • Household income $50k-$100k
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-clock detail-icon"></i>
+                                Recurrency: 30 days
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-database detail-icon"></i>
+                                Data points: 12,500
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-star detail-icon"></i>
+                                Quality: 95%
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pricing-breakdown">
+                        <div class="pricing-row">
+                            <span>Dataset Price</span>
+                            <span>$75.00</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span>Processing Fee</span>
+                            <span>$0.00</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span>Total Amount</span>
+                            <span class="total-amount">$75.00 USD</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">Data Usage Agreement</h2>
+                    <p class="card-subtitle">Your responsibilities as a data buyer</p>
+
+                    <div class="agreement-section">
+                        <div class="agreement-item">
+                            <i class="fas fa-shield-alt agreement-icon"></i>
+                            <div class="agreement-content">
+                                <h4>Privacy-First Data Handling</h4>
+                                <p>You will receive only anonymized, aggregated cohort data. No personally identifiable information (PII) is included.</p>
+                            </div>
+                        </div>
+
+                        <div class="agreement-item">
+                            <i class="fas fa-database agreement-icon"></i>
+                            <div class="agreement-content">
+                                <h4>Data Retention Policy</h4>
+                                <p>You agree to delete all purchased data after the 30 days retention period unless consent is obtained.</p>
+                            </div>
+                        </div>
+
+                        <div class="agreement-item">
+                            <i class="fas fa-balance-scale agreement-icon"></i>
+                            <div class="agreement-content">
+                                <h4>Compliance Requirements</h4>
+                                <p>You must comply with GDPR, CCPA, and all applicable data protection regulations when using this data.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <div class="checkbox" onclick="toggleCheckbox(this)"></div>
+                            <label class="checkbox-label">I agree to the <a href="#">Terms & Conditions</a> and understand my responsibilities as a data buyer</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <div class="checkbox checked" onclick="toggleCheckbox(this)"></div>
+                            <label class="checkbox-label">I agree to the <a href="#">Privacy Policy</a> and Data Usage Agreement outlined above</label>
+                        </div>
+                    </div>
+
+                    <div class="warning">
+                        <i class="fas fa-exclamation-triangle warning-icon"></i>
+                        Please agree to both the Terms & Conditions and Privacy Policy to continue.
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">Payment Method</h2>
+                    <p class="card-subtitle">Secure payment processing</p>
+
+                    <div class="payment-method">
+                        <div class="payment-info">
+                            <i class="fas fa-credit-card payment-icon"></i>
+                            <div class="payment-details">
+                                <h4>Credit Card</h4>
+                                <p>Visa ending in 4242</p>
+                            </div>
+                        </div>
+                        <a href="#" class="change-btn">Change</a>
+                    </div>
+
+                    <div class="action-buttons">
+                        <a href="buyer_dashboard.html" class="btn btn-cancel">Cancel</a>
+                        <button class="btn btn-primary" onclick="handlePurchase()">
+                            <i class="fas fa-shopping-cart"></i>
+                            Complete Purchase
+                            </a>
+                        </button>
+                    </div>
+
+                    <div class="security-notice">
+                        <i class="fas fa-lock security-icon"></i>
+                        <p class="security-text">Your payment is secured with 256-bit SSL encryption. All transactions are processed securely through our payment provider.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleCheckbox(checkbox) {
+            checkbox.classList.toggle('checked');
+        }
+
+        function handlePurchase() {
+            console.log("Purchase initiated...");
+
+            window.location.href = 'p_complete.html';
+        }
+    </script>
+</body>
+</html>

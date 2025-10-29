@@ -1,0 +1,4 @@
+Use terminal command to jump to the path of this plant-my-data folder like this: cd C:\AA\BB\CC\plant-my-data
+Then type "npm install express sqlite3 body-parser"
+Then type "node server.js" to activate the server
+Then click on the home.html file in the pages folder to start the prototype.

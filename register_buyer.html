@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="filename" content="plant-my-data-register-en.html">
+    <title>Plant My Data - Create Account</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 90rem;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        .header {
+            padding: 1.5rem 0;
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #2D5A3D;
+            text-decoration: none;
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+            color: #4CAF50;
+        }
+
+        /* Data Seller Badge */
+        .role-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #f0f8f0;
+            border: 1px solid #4CAF50;
+            border-radius: 0.5rem;
+            padding: 0.375rem 0.75rem;
+            font-size: 0.875rem;
+            color: #2D5A3D;
+            font-weight: 500;
+        }
+
+        .role-badge i {
+            color: #4CAF50;
+            font-size: 0.75rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #666;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #2D5A3D;
+        }
+        /* Main Content */
+        .main-content {
+            padding: 4rem 0;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .register-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+            max-width: 75rem;
+            margin: 0 auto;
+        }
+
+        /* Register Form */
+        .register-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.1);
+            max-width: 25rem;
+            margin: 0 auto;
+            animation: slideUp 0.8s ease-out 0.2s both;
+        }
+
+        .register-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .register-icon {
+            width: 3rem;
+            height: 3rem;
+            margin: 0 auto 1rem;
+            color: #4CAF50;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .register-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #2D5A3D;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #4CAF50;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: #999;
+        }
+
+        .form-input.error {
+            border-color: #ff4444;
+            background: #fff5f5;
+        }
+
+        .form-input.success {
+            border-color: #4CAF50;
+            background: #f8fff8;
+        }
+
+        .error-text {
+            color: #ff4444;
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .error-text.show {
+            display: block;
+        }
+
+        /* Password Group */
+        .password-group {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            padding: 0.25rem;
+        }
+
+        .password-toggle:hover {
+            color: #2D5A3D;
+        }
+
+        /* Country Dropdown */
+        .country-dropdown {
+            position: relative;
+        }
+
+        .country-select {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            background: #f8f9fa;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .country-select:focus {
+            outline: none;
+            border-color: #4CAF50;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+
+        .country-select.placeholder {
+            color: #999;
+        }
+
+        .country-select.selected {
+            color: #333;
+            border-color: #4CAF50;
+        }
+
+        .dropdown-icon {
+            color: #666;
+            transition: transform 0.3s ease;
+        }
+
+        .country-select.open .dropdown-icon {
+            transform: rotate(180deg);
+        }
+
+        .country-options {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 0.5rem 0.5rem;
+            box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .country-options.open {
+            max-height: 12rem;
+        }
+
+        .country-option {
+            padding: 0.875rem 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .country-option:last-child {
+            border-bottom: none;
+        }
+
+        .country-option:hover {
+            background-color: #f8f9fa;
+        }
+
+        .country-option.selected {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        /* Checkbox */
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .checkbox {
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 2px solid #ddd;
+            border-radius: 0.25rem;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            flex-shrink: 0;
+            margin-top: 0.125rem;
+        }
+
+        .checkbox.checked {
+            background: #4CAF50;
+            border-color: #4CAF50;
+        }
+
+        .checkbox.checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 0.875rem;
+            font-weight: bold;
+        }
+
+        .checkbox-label {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+            cursor: pointer;
+        }
+
+        .checkbox-label a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .checkbox-label a:hover {
+            text-decoration: underline;
+        }
+
+        /* Create Account Button */
+        .create-btn {
+            width: 100%;
+            background: #2D5A3D;
+            color: white;
+            padding: 0.875rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+        }
+
+        .create-btn:hover:not(:disabled) {
+            background: #1a3d28;
+            transform: translateY(-1px);
+            box-shadow: 0 0.25rem 1rem rgba(45, 90, 61, 0.3);
+        }
+
+        .create-btn:active {
+            transform: translateY(0);
+        }
+
+        .create-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Success message */
+        .success-message {
+            background: #4CAF50;
+            color: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            display: none;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        /* Error message */
+        .error-message {
+            background: #ff4444;
+            color: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            display: none;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* Login Link */
+        .login-link {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .login-link a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .login-link a:hover {
+            color: #2D5A3D;
+            text-decoration: underline;
+        }
+
+        /* Journey Section */
+        .journey-section {
+            text-align: center;
+            padding: 2rem;
+            animation: slideUp 0.8s ease-out 0.4s both;
+        }
+
+        .plant-illustration {
+            margin-bottom: 2rem;
+            height: 12rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .plant {
+            font-size: 6rem;
+            color: #4CAF50;
+            animation: grow 2s ease-out infinite alternate;
+        }
+
+        .journey-tagline {
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .journey-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2D5A3D;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .journey-description {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.6;
+            max-width: 28rem;
+            margin: 0 auto;
+        }
+
+        /* Storage Info */
+        .storage-info {
+            background: #f0f8f0;
+            border: 1px solid #4CAF50;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.8rem;
+            color: #2D5A3D;
+        }
+
+        .storage-info i {
+            color: #4CAF50;
+            margin-right: 0.5rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(2rem);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-1rem);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes grow {
+            0% {
+                transform: scale(1) rotate(-2deg);
+                filter: hue-rotate(0deg);
+            }
+            100% {
+                transform: scale(1.05) rotate(2deg);
+                filter: hue-rotate(10deg);
+            }
+        }
+
+        /* Floating particles */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 0.25rem;
+            height: 0.25rem;
+            background: #4CAF50;
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .particle:nth-child(2) {
+            top: 40%;
+            left: 80%;
+            animation-delay: -2s;
+        }
+
+        .particle:nth-child(3) {
+            top: 70%;
+            left: 20%;
+            animation-delay: -4s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translateY(-2rem) rotate(180deg);
+                opacity: 0.6;
+            }
+        }
+
+        /* Loading animation */
+        .create-btn.loading {
+            position: relative;
+            color: transparent;
+        }
+
+        .create-btn.loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .register-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                padding: 2rem 0;
+            }
+
+            .register-card {
+                padding: 2rem;
+                margin: 0 1rem;
+            }
+
+            .journey-title {
+                font-size: 1.5rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a {
+                font-size: 0.8rem;
+            }
+
+            .plant-illustration {
+                height: 8rem;
+            }
+
+            .plant {
+                font-size: 4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="nav-left">
+                    <a href="home.html" class="logo">
+                        <i class="fas fa-seedling"></i>
+                        Plant My Data
+                    </a>
+                    <div class="role-badge">
+                        <i class="fas fa-user-shield"></i>
+                        Data Buyer
+                    </div>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="policy.html">Privacy</a></li>
+                    <li><a href="how.html">How it works</a></li>
+                    <li><a href="home.html">Back to Home</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="register-container">
+                <!-- Register Form -->
+                <div class="register-card">
+                    <div class="register-header">
+                        <div class="register-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <h1 class="register-title">Create your account</h1>
+                    </div>
+
+                    <div class="success-message" id="success-message">
+                        <i class="fas fa-check-circle"></i>
+                        Registration successful! Redirecting to login page...
+                    </div>
+
+                    <div class="error-message" id="error-message">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span id="error-text">Registration failed. Please check your information.</span>
+                    </div>
+
+                    <div class="register-form">
+                        <div class="form-group">
+                            <label class="form-label" for="name">Name</label>
+                            <input 
+                                type="text" 
+                                id="name" 
+                                class="form-input" 
+                                placeholder="Your full name"
+                                required
+                            >
+                            <div class="error-text" id="name-error">Please enter your full name</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="email">Email</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                class="form-input" 
+                                placeholder="Your email address"
+                                required
+                            >
+                            <div class="error-text" id="email-error">Please enter a valid email address</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="password">Password</label>
+                            <div class="password-group">
+                                <input 
+                                    type="password" 
+                                    id="password" 
+                                    class="form-input" 
+                                    placeholder="At least 8 characters"
+                                    required
+                                >
+                                <button type="button" class="password-toggle" onclick="togglePassword()">
+                                    <i class="fas fa-eye" id="password-icon"></i>
+                                </button>
+                            </div>
+                            <div class="error-text" id="password-error">Password must be at least 8 characters and contain numbers</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="country">Country</label>
+                            <div class="country-dropdown">
+                                <div class="country-select placeholder" onclick="toggleCountryDropdown()">
+                                    <span id="country-selected">Select your country</span>
+                                    <i class="fas fa-chevron-down dropdown-icon"></i>
+                                </div>
+                                <div class="country-options" id="country-options">
+                                    <div class="country-option" onclick="selectCountry('Australia')">Australia</div>
+                                    <div class="country-option" onclick="selectCountry('New Zealand')">New Zealand</div>
+                                    <div class="country-option" onclick="selectCountry('United States')">United States</div>
+                                    <div class="country-option" onclick="selectCountry('United Kingdom')">United Kingdom</div>
+                                    <div class="country-option" onclick="selectCountry('Canada')">Canada</div>
+                                </div>
+                            </div>
+                            <div class="error-text" id="country-error">Please select your country</div>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <div class="checkbox" id="terms-checkbox" onclick="toggleCheckbox()"></div>
+                            <label class="checkbox-label" for="terms-checkbox" onclick="toggleCheckbox()">
+                                I agree to the <a href="term.html">Terms</a> and <a href="policy.html">Privacy Policy</a>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="create-btn" onclick="handleRegister()" disabled>
+                            Create account
+                        </button>
+
+                        <div class="login-link">
+                            Already have an account? <a href="login_buyer.html">Log in</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Journey Section -->
+                <div class="journey-section">
+                    <div class="plant-illustration">
+                        <div class="particles">
+                            <div class="particle"></div>
+                            <div class="particle"></div>
+                            <div class="particle"></div>
+                        </div>
+                        <div class="plant">
+                            🌱
+                        </div>
+                    </div>
+                    
+                    <p class="journey-tagline">Every forest starts here.</p>
+                    <h2 class="journey-title">Your data journey begins</h2>
+                    <p class="journey-description">
+                        Start with a seed. As you engage with the platform, watch your plant grow and flourish.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let isTermsAccepted = false;
+        let selectedCountry = '';
+
+        // Local Storage Management
+        class UserStorage {
+            static saveUser(userData) {
+                try {
+                    const users = this.getAllUsers();
+                    
+                    // Check if email already exists
+                    if (users.find(user => user.email === userData.email)) {
+                        throw new Error('This email is already registered');
+                    }
+                    
+                    // Add timestamp and unique ID
+                    userData.id = Date.now().toString();
+                    userData.registeredAt = new Date().toISOString();
+                    userData.lastLogin = null;
+                    
+                    users.push(userData);
+                    localStorage.setItem('plantMyDataUsers', JSON.stringify(users));
+                    
+                    // Save current user session
+                    localStorage.setItem('currentUser', JSON.stringify(userData));
+                    
+                    return true;
+                } catch (error) {
+                    throw error;
+                }
+            }
+            
+            static getAllUsers() {
+                try {
+                    const users = localStorage.getItem('plantMyDataUsers');
+                    return users ? JSON.parse(users) : [];
+                } catch (error) {
+                    console.error('Error reading users from localStorage:', error);
+                    return [];
+                }
+            }
+            
+            static getCurrentUser() {
+                try {
+                    const user = localStorage.getItem('currentUser');
+                    return user ? JSON.parse(user) : null;
+                } catch (error) {
+                    console.error('Error reading current user from localStorage:', error);
+                    return null;
+                }
+            }
+            
+            static clearCurrentUser() {
+                localStorage.removeItem('currentUser');
+            }
+            
+            static getUserByEmail(email) {
+                const users = this.getAllUsers();
+                return users.find(user => user.email === email);
+            }
+        }
+
+        // Form validation functions
+        function validateName(name) {
+            return name.trim().length >= 2;
+        }
+
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function validatePassword(password) {
+            const minLength = 8;
+            const hasNumbers = /\d/.test(password);
+            
+            return {
+                isValid: password.length >= minLength && hasNumbers,
+                errors: {
+                    length: password.length < minLength,
+                    numbers: !hasNumbers
+                }
+            };
+        }
+
+        // Show field error
+        function showFieldError(fieldId, show = true) {
+            const errorElement = document.getElementById(`${fieldId}-error`);
+            const inputElement = document.getElementById(fieldId);
+            
+            if (show) {
+                errorElement.classList.add('show');
+                inputElement.classList.add('error');
+                inputElement.classList.remove('success');
+            } else {
+                errorElement.classList.remove('show');
+                inputElement.classList.remove('error');
+                inputElement.classList.add('success');
+            }
+        }
+
+        // Password toggle functionality
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const passwordIcon = document.getElementById('password-icon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                passwordIcon.className = 'fas fa-eye-slash';
+            } else {
+                passwordInput.type = 'password';
+                passwordIcon.className = 'fas fa-eye';
+            }
+        }
+
+        // Country dropdown functionality
+        function toggleCountryDropdown() {
+            const countrySelect = document.querySelector('.country-select');
+            const countryOptions = document.getElementById('country-options');
+            
+            countrySelect.classList.toggle('open');
+            countryOptions.classList.toggle('open');
+        }
+
+        function selectCountry(country) {
+            const countrySelected = document.getElementById('country-selected');
+            const countrySelect = document.querySelector('.country-select');
+            const countryOptions = document.getElementById('country-options');
+            
+            countrySelected.textContent = country;
+            countrySelect.classList.remove('placeholder');
+            countrySelect.classList.add('selected');
+            countrySelect.classList.remove('open');
+            countryOptions.classList.remove('open');
+            
+            // Remove previous selection
+            document.querySelectorAll('.country-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Add selection to clicked option
+            event.target.classList.add('selected');
+            selectedCountry = country;
+            
+            // Hide country error
+            showFieldError('country', false);
+            
+            checkFormValidation();
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.querySelector('.country-dropdown');
+            if (!dropdown.contains(event.target)) {
+                document.querySelector('.country-select').classList.remove('open');
+                document.getElementById('country-options').classList.remove('open');
+            }
+        });
+
+        // Checkbox functionality
+        function toggleCheckbox() {
+            const checkbox = document.getElementById('terms-checkbox');
+            checkbox.classList.toggle('checked');
+            isTermsAccepted = checkbox.classList.contains('checked');
+            checkFormValidation();
+        }
+
+        // Show message functions
+        function showSuccessMessage(message) {
+            const successMsg = document.getElementById('success-message');
+            const errorMsg = document.getElementById('error-message');
+            
+            errorMsg.classList.remove('show');
+            successMsg.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+            successMsg.classList.add('show');
+        }
+
+        function showErrorMessage(message) {
+            const errorMsg = document.getElementById('error-message');
+            const successMsg = document.getElementById('success-message');
+            const errorText = document.getElementById('error-text');
+            
+            successMsg.classList.remove('show');
+            errorText.textContent = message;
+            errorMsg.classList.add('show');
+            
+            setTimeout(() => {
+                errorMsg.classList.remove('show');
+            }, 5000);
+        }
+
+        // Form validation
+        function checkFormValidation() {
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const createBtn = document.querySelector('.create-btn');
+            
+            const isNameValid = validateName(name);
+            const isEmailValid = validateEmail(email);
+            const passwordValidation = validatePassword(password);
+            const isCountrySelected = selectedCountry.length > 0;
+            
+            const isValid = isNameValid && 
+                           isEmailValid && 
+                           passwordValidation.isValid && 
+                           isCountrySelected && 
+                           isTermsAccepted;
+            
+            createBtn.disabled = !isValid;
+        }
+
+        // Register handling with Local Storage and redirect
+        function handleRegister() {
+            const button = document.querySelector('.create-btn');
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+
+            // Add loading animation
+            button.classList.add('loading');
+            button.disabled = true;
+
+            // Simulate registration process
+            setTimeout(() => {
+                try {
+                    // Create user data object
+                    const userData = {
+                        name: name,
+                        email: email,
+                        password: password, // In real app, this should be hashed
+                        country: selectedCountry,
+                        termsAccepted: isTermsAccepted
+                    };
+
+                    // Save to localStorage
+                    UserStorage.saveUser(userData);
+                    
+                    // Show success message
+                    showSuccessMessage(`Welcome ${name}! Account created successfully. Redirecting to login...`);
+                    
+                    // Log the saved data for demonstration
+                    console.log('User data saved to localStorage:', userData);
+                    console.log('All users:', UserStorage.getAllUsers());
+                    
+                    // Redirect to login page after 2 seconds
+                    window.location.href = 'login.html';
+                    
+                } catch (error) {
+                    showErrorMessage(error.message);
+                    console.error('Registration error:', error);
+                    
+                    button.classList.remove('loading');
+                    button.disabled = false;
+                    checkFormValidation();
+                }
+            }, 1500);
+        }
+
+        // Enhanced form interactions
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'scale(1.02)';
+                this.parentElement.style.transition = 'transform 0.3s ease';
+            });
+
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'scale(1)';
+                
+                // Validate on blur
+                if (this.id === 'name' && this.value.trim()) {
+                    showFieldError('name', !validateName(this.value.trim()));
+                }
+                
+                if (this.id === 'email' && this.value.trim()) {
+                    showFieldError('email', !validateEmail(this.value.trim()));
+                }
+                
+                if (this.id === 'password' && this.value) {
+                    const validation = validatePassword(this.value);
+                    showFieldError('password', !validation.isValid);
+                }
+            });
+
+            input.addEventListener('input', function() {
+                checkFormValidation();
+                
+                // Real-time validation feedback
+                if (this.id === 'name' && this.value.trim()) {
+                    showFieldError('name', !validateName(this.value.trim()));
+                }
+                
+                if (this.id === 'email' && this.value.trim()) {
+                    showFieldError('email', !validateEmail(this.value.trim()));
+                }
+                
+                if (this.id === 'password' && this.value) {
+                    const validation = validatePassword(this.value);
+                    showFieldError('password', !validation.isValid);
+                }
+            });
+        });
+
+        // Add floating animation to particles
+        function createFloatingParticles() {
+            const particles = document.querySelector('.particles');
+            
+            setInterval(() => {
+                if (Math.random() > 0.7) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.top = Math.random() * 100 + '%';
+                    particle.style.animationDelay = Math.random() * 2 + 's';
+                    particles.appendChild(particle);
+
+                    // Remove particle after animation
+                    setTimeout(() => {
+                        if (particle.parentNode) {
+                            particle.parentNode.removeChild(particle);
+                        }
+                    }, 6000);
+                }
+            }, 3000);
+        }
+
+        // Initialize animations and check for existing users
+        document.addEventListener('DOMContentLoaded', function() {
+            createFloatingParticles();
+            
+            // Add entrance animations to form elements
+            const formElements = document.querySelectorAll('.form-group');
+            formElements.forEach((element, index) => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(1rem)';
+                element.style.animation = `slideUp 0.6s ease-out ${0.6 + index * 0.1}s both`;
+            });
+            
+            // Check if there are existing users (for demonstration)
+            const existingUsers = UserStorage.getAllUsers();
+            if (existingUsers.length > 0) {
+                console.log('Existing users in localStorage:', existingUsers);
+            }
+        });
+
+        // Add keyboard support for form submission
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter' && !document.querySelector('.create-btn').disabled) {
+                handleRegister();
+            }
+        });
+    </script>
+</body>
+</html>

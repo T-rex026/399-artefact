@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="filename" content="profile.html">
+    <title>Edit Profile - Plant My Data</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f8fafc;
+            color: #374151;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 60rem;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header {
+            background-color: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1rem 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #059669;
+            text-decoration: none;
+        }
+
+        .logo i {
+            font-size: 1.5rem;
+        }
+
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background: white;
+            color: #6b7280;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+
+        .logout-btn:hover {
+            border-color: #9ca3af;
+            color: #059669;
+        }
+
+        .breadcrumb {
+            padding: 1rem 0;
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+
+        .breadcrumb a {
+            color: #6b7280;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: #059669;
+            text-decoration: underline;
+        }
+
+        .main-content {
+            padding: 2rem 0;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-icon {
+            width: 3rem;
+            height: 3rem;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+
+        .page-icon i {
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .content-sections {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 1rem;
+            border: 1px solid #e5e7eb;
+            overflow: hidden;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .section-icon {
+            color: #6b7280;
+            font-size: 1rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .edit-profile-btn, .cancel-btn {
+            background: #059669;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .edit-profile-btn:hover {
+            background: #047857;
+        }
+
+        .cancel-btn {
+            background: #6b7280;
+        }
+
+        .cancel-btn:hover {
+            background: #4b5563;
+        }
+
+        .save-btn {
+            background: #059669;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .save-btn:hover {
+            background: #047857;
+        }
+
+        .profile-content {
+            padding: 1.5rem 2rem;
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 3rem;
+            height: 3rem;
+            background: #e5e7eb;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #6b7280;
+        }
+
+        .user-details h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 0.25rem;
+        }
+
+        .user-details p {
+            color: #6b7280;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .user-tags {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background: #f3f4f6;
+            color: #6b7280;
+            padding: 0.125rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .tag i {
+            font-size: 0.625rem;
+        }
+
+        /* Edit Form Styles */
+        .edit-form {
+            display: none;
+            padding: 1.5rem 2rem;
+            border-top: 1px solid #f3f4f6;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input {
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            background: #f9fafb;
+            transition: all 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #059669;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+        }
+
+        .form-select {
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            background: #f9fafb;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-color: #059669;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.75rem;
+            padding-top: 1rem;
+            border-top: 1px solid #f3f4f6;
+        }
+
+        .preferences-section {
+            padding: 1.5rem 2rem 2rem;
+        }
+
+        .section-subtitle {
+            color: #6b7280;
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+        }
+
+        .preference-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .preference-item:last-child {
+            border-bottom: none;
+        }
+
+        .preference-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .preference-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .health-icon {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        .shopping-icon {
+            background: #f0f9ff;
+            color: #0284c7;
+        }
+
+        .browsing-icon {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        .location-icon {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .social-icon {
+            background: #f3e8ff;
+            color: #7c3aed;
+        }
+
+        .financial-icon {
+            background: #ecfdf5;
+            color: #059669;
+        }
+
+        .security-icon {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+
+        .preference-details h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 0.25rem;
+        }
+
+        .preference-details p {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 3rem;
+            height: 1.75rem;
+            background: #e5e7eb;
+            border-radius: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .toggle-switch.active {
+            background: #059669;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 0.125rem;
+            left: 0.125rem;
+            width: 1.5rem;
+            height: 1.5rem;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(1.25rem);
+        }
+
+        .password-section {
+            padding: 1.5rem 2rem;
+        }
+
+        .password-form {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .password-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            background: #f9fafb;
+        }
+
+        .password-input:focus {
+            outline: none;
+            border-color: #059669;
+            background: white;
+        }
+
+        .update-btn {
+            background: #f3f4f6;
+            color: #6b7280;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .update-btn:hover {
+            background: #e5e7eb;
+            border-color: #9ca3af;
+        }
+
+        /* Hidden elements */
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 768px) {
+            html {
+                font-size: 14px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .preference-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .password-form {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <i class="fas fa-leaf"></i>
+                    Plant My Data
+                </a>
+                <a href="home.html" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Log out
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="seller_dashboard.html">Dashboard</a> / Profile
+        </div>
+    </div>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <div class="page-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h1 class="page-title">Edit Profile</h1>
+                <p class="page-subtitle">Manage your personal information, data sharing preferences, and security settings.</p>
+            </div>
+
+            <div class="content-sections">
+                <div class="section">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <i class="fas fa-user section-icon"></i>
+                            Profile Overview
+                        </div>
+                        <div class="action-buttons">
+                            <button class="edit-profile-btn" onclick="enterEditMode()">Edit Profile</button>
+                            <button class="cancel-btn hidden" onclick="exitEditMode()">Cancel</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Display Mode -->
+                    <div class="profile-content" id="profileDisplay">
+                        <div class="profile-info">
+                            <div class="user-avatar">AC</div>
+                            <div class="user-details">
+                                <h3 id="displayName">Alex Chen</h3>
+                                <p id="displayEmail">alex.chen@email.com</p>
+                                <div class="user-tags">
+                                    <span class="tag">
+                                        <i class="fas fa-heart"></i>
+                                        health
+                                    </span>
+                                    <span class="tag">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        shopping
+                                    </span>
+                                    <span class="tag">
+                                        <i class="fas fa-users"></i>
+                                        social
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Edit Mode -->
+                    <div class="edit-form hidden" id="profileEdit">
+                        <div class="profile-info" style="margin-bottom: 1.5rem;">
+                            <div class="user-avatar">AC</div>
+                            <div class="user-details">
+                                <h3>Alex Chen</h3>
+                                <p>alex.chen@email.com</p>
+                                <div class="user-tags">
+                                    <span class="tag">
+                                        <i class="fas fa-heart"></i>
+                                        health
+                                    </span>
+                                    <span class="tag">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        shopping
+                                    </span>
+                                    <span class="tag">
+                                        <i class="fas fa-users"></i>
+                                        social
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" class="form-input" id="editName" value="Alex Chen">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-input" id="editEmail" value="alex.chen@email.com">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Age</label>
+                                <input type="number" class="form-input" id="editAge" value="40">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Gender</label>
+                                <select class="form-select" id="editGender">
+                                    <option value="prefer-not-say" selected>Prefer not to say</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="non-binary">Non-binary</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="grid-column: 1 / -1;">
+                                <label class="form-label">Nationality</label>
+                                <input type="text" class="form-input" id="editNationality" value="New Zealand">
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="save-btn" onclick="saveProfile()">Save Changes</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <i class="fas fa-share-alt section-icon"></i>
+                            Data Sharing Preferences
+                        </div>
+                    </div>
+                    <div class="preferences-section">
+                        <p class="section-subtitle">Choose what types of data you're comfortable sharing with partners</p>
+                        
+                        <div class="preference-item">
+                            <div class="preference-info">
+                                <div class="preference-icon health-icon">
+                                    <i class="fas fa-heartbeat"></i>
+                                </div>
+                                <div class="preference-details">
+                                    <h4>Health Data</h4>
+                                    <p>Fitness tracking, medical preferences</p>
+                                </div>
+                            </div>
+                            <div class="toggle-switch active" onclick="toggleSwitch(this)">
+                                <div class="toggle-slider"></div>
+                            </div>
+                        </div>
+
+                        <div class="preference-item">
+                            <div class="preference-info">
+                                <div class="preference-icon shopping-icon">
+                                    <i class="fas fa-shopping-bag"></i>
+                                </div>
+                                <div class="preference-details">
+                                    <h4>Shopping Data</h4>
+                                    <p>Purchase history, preferences</p>
+                                </div>
+                            </div>
+                            <div class="toggle-switch active" onclick="toggleSwitch(this)">
+                                <div class="toggle-slider"></div>
+                            </div>
+                        </div>
+
+                        <div class="preference-item">
+                            <div class="preference-info">
+                                <div class="preference-icon browsing-icon">
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                                <div class="preference-details">
+                                    <h4>Browsing Data</h4>
+                                    <p>Website visits, interests</p>
+                                </div>
+                            </div>
+                            <div class="toggle-switch" onclick="toggleSwitch(this)">
+                                <div class="toggle-slider"></div>
+                            </div>
+                        </div>
+
+                        <div class="preference-item">
+                            <div class="preference-info">
+                                <div class="preference-icon location-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="preference-details">
+                                    <h4>Location Data</h4>
+                                    <p>GPS data, travel patterns</p>
+                                </div>
+                            </div>
+                            <div class="toggle-switch" onclick="toggleSwitch(this)">
+                                <div class="toggle-slider"></div>
+                            </div>
+                        </div>
+
+                        <div class="preference-item">
+                            <div class="preference-info">
+                                <div class="preference-icon social-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="preference-details">
+                                    <h4>Social Data</h4>
+                                    <p>Social media activity, connections</p>
+                                </div>
+                            </div>
+                            <div class="toggle-switch active" onclick="toggleSwitch(this)">
+                                <div class="toggle-slider"></div>
+                            </div>
+                        </div>
+
+                        <div class="preference-item">
+                            <div class="preference-info">
+                                <div class="preference-icon financial-icon">
+                                    <i class="fas fa-credit-card"></i>
+                                </div>
+                                <div class="preference-details">
+                                    <h4>Financial Data</h4>
+                                    <p>Spending patterns, income data</p>
+                                </div>
+                            </div>
+                            <div class="toggle-switch" onclick="toggleSwitch(this)">
+                                <div class="toggle-slider"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <i class="fas fa-shield-alt section-icon"></i>
+                            Security & Privacy
+                        </div>
+                    </div>
+                    <div class="preferences-section">
+                        <p class="section-subtitle">Manage your account security and notification preferences</p>
+                        
+                        <div class="preference-item">
+                            <div class="preference-info">
+                                <div class="preference-icon security-icon">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="preference-details">
+                                    <h4>Two-Factor Authentication</h4>
+                                    <p>Add an extra layer of security to your account</p>
+                                </div>
+                            </div>
+                            <div class="toggle-switch" onclick="toggleSwitch(this)">
+                                <div class="toggle-slider"></div>
+                            </div>
+                        </div>
+
+                        <div class="preference-item">
+                            <div class="preference-info">
+                                <div class="preference-icon security-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="preference-details">
+                                    <h4>Email Notifications</h4>
+                                    <p>Receive updates about your data sharing activity</p>
+                                </div>
+                            </div>
+                            <div class="toggle-switch active" onclick="toggleSwitch(this)">
+                                <div class="toggle-slider"></div>
+                            </div>
+                        </div>
+
+                        <div class="preference-item">
+                            <div class="preference-info">
+                                <div class="preference-icon security-icon">
+                                    <i class="fas fa-bullhorn"></i>
+                                </div>
+                                <div class="preference-details">
+                                    <h4>Marketing Emails</h4>
+                                    <p>Receive tips and updates about new features</p>
+                                </div>
+                            </div>
+                            <div class="toggle-switch" onclick="toggleSwitch(this)">
+                                <div class="toggle-slider"></div>
+                            </div>
+                        </div>
+
+                        <div class="preference-item">
+                            <div class="preference-info">
+                                <div class="preference-icon security-icon">
+                                    <i class="fas fa-download"></i>
+                                </div>
+                                <div class="preference-details">
+                                    <h4>Data Export</h4>
+                                    <p>Allow downloading your complete data archive</p>
+                                </div>
+                            </div>
+                            <div class="toggle-switch active" onclick="toggleSwitch(this)">
+                                <div class="toggle-slider"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-header">
+                        <div class="section-title">Change Password</div>
+                    </div>
+                    <div class="password-section">
+                        <div class="password-form">
+                            <input type="password" class="password-input" placeholder="Enter new password">
+                            <button class="update-btn">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleSwitch(element) {
+            element.classList.toggle('active');
+        }
+
+        function enterEditMode() {
+            // Hide display mode and show edit mode
+            document.getElementById('profileDisplay').classList.add('hidden');
+            document.getElementById('profileEdit').classList.remove('hidden');
+            
+            // Change button visibility
+            document.querySelector('.edit-profile-btn').classList.add('hidden');
+            document.querySelector('.cancel-btn').classList.remove('hidden');
+        }
+
+        function exitEditMode() {
+            // Show display mode and hide edit mode
+            document.getElementById('profileDisplay').classList.remove('hidden');
+            document.getElementById('profileEdit').classList.add('hidden');
+            
+            // Change button visibility
+            document.querySelector('.edit-profile-btn').classList.remove('hidden');
+            document.querySelector('.cancel-btn').classList.add('hidden');
+            
+            // Reset form values to original
+            document.getElementById('editName').value = 'Alex Chen';
+            document.getElementById('editEmail').value = 'alex.chen@email.com';
+            document.getElementById('editAge').value = '40';
+            document.getElementById('editGender').value = 'prefer-not-say';
+            document.getElementById('editNationality').value = 'New Zealand';
+        }
+
+        function saveProfile() {
+            // Get values from form
+            const name = document.getElementById('editName').value;
+            const email = document.getElementById('editEmail').value;
+            
+            // Update display
+            document.getElementById('displayName').textContent = name;
+            document.getElementById('displayEmail').textContent = email;
+            
+            // Exit edit mode
+            exitEditMode();
+            
+            // Show success message (optional)
+            alert('Profile updated successfully!');
+        }
+    </script>
+</body>
+</html>

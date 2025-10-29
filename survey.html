@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="filename" content="survey.html">
+    <title>Plant My Data - Surveys</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .logo i {
+            color: #4a7c59;
+        }
+
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            border: 1px solid #dee2e6;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .logout-btn:hover {
+            background: #f8f9fa;
+            transform: translateY(-1px);
+        }
+
+        .breadcrumb {
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a:hover {
+            color: #4a7c59;
+        }
+
+        .breadcrumb span {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .surveys-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .surveys-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .surveys-description {
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #4a7c59;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid #dee2e6;
+            border-radius: 20px;
+            background: white;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.85rem;
+        }
+
+        .filter-tab.active {
+            background: #4a7c59;
+            color: white;
+            border-color: #4a7c59;
+        }
+
+        .filter-tab:hover {
+            background: #f8f9fa;
+        }
+
+        .filter-tab.active:hover {
+            background: #3d6b4a;
+        }
+
+        .filter-count {
+            background: rgba(255,255,255,0.2);
+            padding: 0.1rem 0.4rem;
+            border-radius: 10px;
+            font-size: 0.75rem;
+        }
+
+        .survey-status-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 3rem;
+        }
+
+        .status-tab {
+            padding: 0.75rem 1.5rem;
+            border: 1px solid #dee2e6;
+            background: white;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .status-tab:first-child {
+            border-radius: 8px 0 0 8px;
+        }
+
+        .status-tab:last-child {
+            border-radius: 0 8px 8px 0;
+        }
+
+        .status-tab.active {
+            background: #4a7c59;
+            color: white;
+            border-color: #4a7c59;
+        }
+
+        .status-tab:hover {
+            background: #f8f9fa;
+        }
+
+        .status-tab.active:hover {
+            background: #3d6b4a;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .star-icon {
+            color: #ffc107;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .survey-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .survey-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .survey-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .survey-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .survey-category {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .category-shopping {
+            background: #e8f5e8;
+            color: #155724;
+        }
+
+        .category-travel {
+            background: #e3f2fd;
+            color: #0d47a1;
+        }
+
+        .category-health {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .category-technology {
+            background: #f3e5f5;
+            color: #4a148c;
+        }
+
+        .category-lifestyle {
+            background: #e1f5fe;
+            color: #006064;
+        }
+
+        .category-food {
+            background: #fff8e1;
+            color: #f57f17;
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: -0.5rem;
+            right: 1rem;
+            background: #ffc107;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .survey-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .survey-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .survey-points {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .points-value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #4a7c59;
+        }
+
+        .difficulty {
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .difficulty-easy {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .difficulty-medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .start-survey-btn {
+            width: 100%;
+            background: #4a7c59;
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .start-survey-btn:hover {
+            background: #3d6b4a;
+            transform: translateY(-1px);
+        }
+
+        .all-surveys-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        /* Completed Surveys Styles */
+        .completed-section {
+            display: none;
+        }
+
+        .completed-section.active {
+            display: block;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 16px;
+            margin-top: 2rem;
+        }
+
+        .empty-icon {
+            font-size: 4rem;
+            color: #ccc;
+            margin-bottom: 1.5rem;
+        }
+
+        .empty-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #333;
+        }
+
+        .empty-description {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .view-available-btn {
+            background: #4a7c59;
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .view-available-btn:hover {
+            background: #3d6b4a;
+            transform: translateY(-1px);
+        }
+
+        .available-section {
+            display: block;
+        }
+
+        .available-section.hidden {
+            display: none;
+        }
+
+        /* Completed survey card styles */
+        .completed-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .completed-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #28a745;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .completed-date {
+            color: #666;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        .points-earned {
+            color: #28a745;
+            font-weight: 600;
+        }
+
+        @media (max-width: 1200px) {
+            .featured-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .all-surveys-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .stats-section {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+            }
+            
+            .filter-tabs {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 0.5rem;
+            }
+            
+            .all-surveys-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .survey-status-tabs {
+                flex-direction: column;
+                align-items: center;
+                gap: 0;
+            }
+            
+            .status-tab:first-child,
+            .status-tab:last-child {
+                border-radius: 8px;
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-seedling"></i>
+                Plant My Data
+            </div>
+            <a href="home.html" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                Log out
+            </a>
+        </div>
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="seller_dashboard.html">Dashboard</a> / <span>Surveys</span>
+        </div>
+
+        <!-- Surveys Header -->
+        <div class="surveys-header">
+            <h1 class="surveys-title">
+                <i class="fas fa-clipboard-list"></i>
+                Surveys for You
+            </h1>
+            <p class="surveys-description">
+                Complete surveys to earn points and help companies understand your preferences. Your responses are always anonymized and used only for research purposes.
+            </p>
+        </div>
+
+        <!-- Statistics -->
+        <div class="stats-section">
+            <div class="stat-item">
+                <div class="stat-number">6</div>
+                <div class="stat-label">Available</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">600</div>
+                <div class="stat-label">Points Available</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Points Earned</div>
+            </div>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="filter-tabs">
+            <div class="filter-tab active">
+                <i class="fas fa-list"></i>
+                All Surveys
+            </div>
+            <div class="filter-tab">
+                <i class="fas fa-home"></i>
+                Lifestyle
+                <span class="filter-count">1</span>
+            </div>
+            <div class="filter-tab">
+                <i class="fas fa-heartbeat"></i>
+                Health
+                <span class="filter-count">1</span>
+            </div>
+            <div class="filter-tab">
+                <i class="fas fa-shopping-cart"></i>
+                Shopping
+                <span class="filter-count">1</span>
+            </div>
+            <div class="filter-tab">
+                <i class="fas fa-microchip"></i>
+                Technology
+                <span class="filter-count">1</span>
+            </div>
+            <div class="filter-tab">
+                <i class="fas fa-plane"></i>
+                Travel
+                <span class="filter-count">1</span>
+            </div>
+            <div class="filter-tab">
+                <i class="fas fa-utensils"></i>
+                Food
+                <span class="filter-count">1</span>
+            </div>
+        </div>
+
+        <!-- Survey Status Tabs -->
+        <div class="survey-status-tabs">
+            <button class="status-tab active" id="availableTab">Available Surveys</button>
+            <button class="status-tab" id="completedTab">Completed Surveys</button>
+        </div>
+
+        <!-- Available Surveys Content -->
+        <div id="availableContent" class="available-section">
+            <!-- Featured Surveys -->
+            <div class="featured-section">
+                <h2 class="section-title">
+                    <i class="fas fa-star star-icon"></i>
+                    Featured Surveys
+                </h2>
+                
+                <div class="featured-grid">
+                    <!-- Shopping Survey -->
+                    <div class="survey-card">
+                        <div class="featured-badge">Featured</div>
+                        <div class="survey-header">
+                            <div>
+                                <h3 class="survey-title">Shopping Preferences & Habits</h3>
+                                <span class="survey-category category-shopping">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    Shopping
+                                </span>
+                            </div>
+                        </div>
+                        <p class="survey-description">Help retailers understand consumer behavior and shopping patterns in 2024</p>
+                        <div class="survey-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-clock"></i>
+                                8 minutes
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-question-circle"></i>
+                                11 questions
+                            </div>
+                        </div>
+                        <div class="survey-points">
+                            <span class="difficulty difficulty-easy">easy</span>
+                            <span class="points-value">
+                                <i class="fas fa-coins"></i>
+                                100 points
+                            </span>
+                        </div>
+                        <a href="e_survey.html" class="start-survey-btn">
+                            <i class="fas fa-play"></i>
+                            Start Survey
+                        </a>
+                    </div>
+
+                    <!-- Travel Survey -->
+                    <div class="survey-card">
+                        <div class="featured-badge">Featured</div>
+                        <div class="survey-header">
+                            <div>
+                                <h3 class="survey-title">Travel & Transportation</h3>
+                                <span class="survey-category category-travel">
+                                    <i class="fas fa-plane"></i>
+                                    Travel
+                                </span>
+                            </div>
+                        </div>
+                        <p class="survey-description">Help improve transportation services by sharing your travel patterns</p>
+                        <div class="survey-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-clock"></i>
+                                15 minutes
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-question-circle"></i>
+                                25 questions
+                            </div>
+                        </div>
+                        <div class="survey-points">
+                            <span class="difficulty difficulty-medium">medium</span>
+                            <span class="points-value">
+                                <i class="fas fa-coins"></i>
+                                100 points
+                            </span>
+                        </div>
+                        <button class="start-survey-btn">
+                            <i class="fas fa-play"></i>
+                            Start Survey
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- All Surveys -->
+            <div class="all-surveys-section">
+                <h2 class="section-title">All Surveys</h2>
+                
+                <div class="all-surveys-grid">
+                    <!-- Digital Wellness Survey -->
+                    <div class="survey-card">
+                        <div class="survey-header">
+                            <div>
+                                <h3 class="survey-title">Digital Wellness Survey</h3>
+                                <span class="survey-category category-health">
+                                    <i class="fas fa-heartbeat"></i>
+                                    Health
+                                </span>
+                            </div>
+                        </div>
+                        <p class="survey-description">Share insights about your relationship with technology and screen time</p>
+                        <div class="survey-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-clock"></i>
+                                12 minutes
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-question-circle"></i>
+                                20 questions
+                            </div>
+                        </div>
+                        <div class="survey-points">
+                            <span class="difficulty difficulty-medium">medium</span>
+                            <span class="points-value">
+                                <i class="fas fa-coins"></i>
+                                100 points
+                            </span>
+                        </div>
+                        <button class="start-survey-btn">
+                            <i class="fas fa-play"></i>
+                            Start Survey
+                        </button>
+                    </div>
+
+                    <!-- Food Delivery Survey -->
+                    <div class="survey-card">
+                        <div class="survey-header">
+                            <div>
+                                <h3 class="survey-title">Food Delivery Trends</h3>
+                                <span class="survey-category category-food">
+                                    <i class="fas fa-utensils"></i>
+                                    Food
+                                </span>
+                            </div>
+                        </div>
+                        <p class="survey-description">Quick survey about your food ordering habits and preferences</p>
+                        <div class="survey-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-clock"></i>
+                                5 minutes
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-question-circle"></i>
+                                10 questions
+                            </div>
+                        </div>
+                        <div class="survey-points">
+                            <span class="difficulty difficulty-easy">easy</span>
+                            <span class="points-value">
+                                <i class="fas fa-coins"></i>
+                                100 points
+                            </span>
+                        </div>
+                        <button class="start-survey-btn">
+                            <i class="fas fa-play"></i>
+                            Start Survey
+                        </button>
+                    </div>
+
+                    <!-- Smart Home Survey -->
+                    <div class="survey-card">
+                        <div class="survey-header">
+                            <div>
+                                <h3 class="survey-title">Smart Home Technology</h3>
+                                <span class="survey-category category-technology">
+                                    <i class="fas fa-microchip"></i>
+                                    Technology
+                                </span>
+                            </div>
+                        </div>
+                        <p class="survey-description">Share your experience with smart home devices and IoT products</p>
+                        <div class="survey-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-clock"></i>
+                                10 minutes
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-question-circle"></i>
+                                18 questions
+                            </div>
+                        </div>
+                        <div class="survey-points">
+                            <span class="difficulty difficulty-medium">medium</span>
+                            <span class="points-value">
+                                <i class="fas fa-coins"></i>
+                                100 points
+                            </span>
+                        </div>
+                        <button class="start-survey-btn">
+                            <i class="fas fa-play"></i>
+                            Start Survey
+                        </button>
+                    </div>
+
+                    <!-- Daily Lifestyle Survey -->
+                    <div class="survey-card">
+                        <div class="survey-header">
+                            <div>
+                                <h3 class="survey-title">Daily Lifestyle Habits</h3>
+                                <span class="survey-category category-lifestyle">
+                                    <i class="fas fa-home"></i>
+                                    Lifestyle
+                                </span>
+                            </div>
+                        </div>
+                        <p class="survey-description">Quick check-in about your daily routines and lifestyle choices</p>
+                        <div class="survey-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-clock"></i>
+                                6 minutes
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-question-circle"></i>
+                                12 questions
+                            </div>
+                        </div>
+                        <div class="survey-points">
+                            <span class="difficulty difficulty-easy">easy</span>
+                            <span class="points-value">
+                                <i class="fas fa-coins"></i>
+                                100 points
+                            </span>
+                        </div>
+                        <button class="start-survey-btn">
+                            <i class="fas fa-play"></i>
+                            Start Survey
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Completed Surveys Content -->
+        <div id="completedContent" class="completed-section">
+            <h2 class="section-title">
+                <i class="fas fa-check-circle" style="color: #28a745;"></i>
+                Completed Surveys
+            </h2>
+            
+            <div class="empty-state">
+                <div class="empty-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3 class="empty-title">No completed surveys yet</h3>
+                <p class="empty-description">Complete your first survey to start earning points!</p>
+                <button class="view-available-btn" onclick="switchToAvailable()">View Available Surveys</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching functionality
+        const availableTab = document.getElementById('availableTab');
+        const completedTab = document.getElementById('completedTab');
+        const availableContent = document.getElementById('availableContent');
+        const completedContent = document.getElementById('completedContent');
+
+        function switchToAvailable() {
+            availableTab.classList.add('active');
+            completedTab.classList.remove('active');
+            availableContent.style.display = 'block';
+            completedContent.style.display = 'none';
+        }
+
+        function switchToCompleted() {
+            completedTab.classList.add('active');
+            availableTab.classList.remove('active');
+            availableContent.style.display = 'none';
+            completedContent.style.display = 'block';
+        }
+
+        availableTab.addEventListener('click', switchToAvailable);
+        completedTab.addEventListener('click', switchToCompleted);
+
+        // Filter tab functionality
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Start survey functionality
+        document.querySelectorAll('.start-survey-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert('Starting survey...');
+                // Here you would redirect to the actual survey
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="filename" content="confirm_sharing.html">
+    <title>Plant My Data - Confirm Data Sharing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .logo i {
+            color: #4a7c59;
+        }
+
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            border: 1px solid #dee2e6;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .logout-btn:hover {
+            background: #f8f9fa;
+            transform: translateY(-1px);
+        }
+
+        .main-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .main-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: #333;
+        }
+
+        .main-subtitle {
+            font-size: 1rem;
+            color: #666;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .breadcrumb a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a:hover {
+            color: #4a7c59;
+        }
+
+        .breadcrumb span {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .confirmation-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .status-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .status-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .status-icon {
+            color: #4a7c59;
+            font-size: 1.5rem;
+        }
+
+        .status-content h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .status-description {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .status-badge {
+            background: #4a7c59;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .data-summary {
+            margin-bottom: 2rem;
+        }
+
+        .summary-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #f1f3f4;
+        }
+
+        .summary-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .summary-category {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .data-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.875rem 0;
+            border-bottom: 1px solid #f8f9fa;
+        }
+
+        .data-item:last-child {
+            border-bottom: none;
+            margin-bottom: 1rem;
+        }
+
+        .item-info h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .item-details {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .item-price {
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .total-section {
+            padding-top: 1rem;
+            border-top: 2px solid #e9ecef;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .total-label {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .total-amount {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .earnings-section {
+            background: #e8f5e8;
+            border: 1px solid #c3e6cb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .earnings-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .earnings-icon {
+            color: #4a7c59;
+            font-size: 1.25rem;
+        }
+
+        .earnings-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #155724;
+        }
+
+        .earnings-description {
+            font-size: 0.9rem;
+            color: #155724;
+            margin-bottom: 1rem;
+        }
+
+        .points-display {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #4a7c59;
+        }
+
+        .points-label {
+            font-size: 0.9rem;
+            color: #4a7c59;
+            margin-left: 0.5rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 1.5rem;
+            color: #4a7c59;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-description {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .info-section {
+            background: #f0f8ff;
+            border: 1px solid #b3d9ff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #0056b3;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-text {
+            font-size: 0.9rem;
+            color: #0056b3;
+            line-height: 1.6;
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .action-btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            border: none;
+        }
+
+        .cancel-btn {
+            background: white;
+            color: #666;
+            border: 1px solid #dee2e6;
+        }
+
+        .cancel-btn:hover {
+            background: #f8f9fa;
+            color: #333;
+        }
+
+        .confirm-btn {
+            background: #4a7c59;
+            color: white;
+        }
+
+        .confirm-btn:hover {
+            background: #3d6b4a;
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .main-title {
+                font-size: 1.75rem;
+            }
+            
+            .confirmation-card {
+                padding: 1.5rem;
+            }
+            
+            .status-section {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .data-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-seedling"></i>
+                Plant My Data
+            </div>
+            <a href="home.html" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                Log out
+            </a>
+        </div>
+
+        <!-- Main Header -->
+        <div class="main-header">
+            <h1 class="main-title">Confirm Data Sharing</h1>
+            <p class="main-subtitle">Review and confirm your data sharing</p>
+        </div>
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="upload.html">Data Sharing</a> / <span>Confirm Processing</span>
+        </div>
+
+        <!-- Confirmation Card -->
+        <div class="confirmation-card">
+            <!-- Status Section -->
+            <div class="status-section">
+                <div class="status-left">
+                    <i class="fas fa-check-circle status-icon"></i>
+                    <div class="status-content">
+                        <h3>Ready to Share Your Data</h3>
+                        <p class="status-description">Review your data and confirm sharing to earn rewards</p>
+                    </div>
+                </div>
+                <span class="status-badge">Ready</span>
+            </div>
+
+            <!-- Data Summary -->
+            <div class="data-summary">
+                <div class="summary-header">
+                    <h3 class="summary-title">Data Summary</h3>
+                    <span class="summary-category">Groceries</span>
+                </div>
+
+                <div class="data-item">
+                    <div class="item-info">
+                        <h4>Fresh Milk 2L</h4>
+                        <p class="item-details">Qty: 2 x $4.50</p>
+                    </div>
+                    <span class="item-price">$9.00</span>
+                </div>
+
+                <div class="data-item">
+                    <div class="item-info">
+                        <h4>Whole Wheat Bread</h4>
+                        <p class="item-details">Qty: 1 x $3.20</p>
+                    </div>
+                    <span class="item-price">$3.20</span>
+                </div>
+
+                <div class="data-item">
+                    <div class="item-info">
+                        <h4>Organic Eggs (12)</h4>
+                        <p class="item-details">Qty: 1 x $6.80</p>
+                    </div>
+                    <span class="item-price">$6.80</span>
+                </div>
+
+                <div class="total-section">
+                    <div class="total-row">
+                        <span class="total-label">Total Data Value</span>
+                        <span class="total-amount">$5.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Earnings Section -->
+            <div class="earnings-section">
+                <div class="earnings-header">
+                    <i class="fas fa-dollar-sign earnings-icon"></i>
+                    <span class="earnings-title">Your Earnings</span>
+                </div>
+                <p class="earnings-description">You will earn from sharing this data</p>
+                <div>
+                    <span class="points-display">100</span>
+                    <span class="points-label">points</span>
+                </div>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-user-secret feature-icon"></i>
+                    <h4 class="feature-title">Data Anonymized</h4>
+                    <p class="feature-description">Your personal details are protected</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-bolt feature-icon"></i>
+                    <h4 class="feature-title">Instant Rewards</h4>
+                    <p class="feature-description">Points added to your account immediately</p>
+                </div>
+            </div>
+
+            <!-- Info Section -->
+            <div class="info-section">
+                <h4 class="info-title">What happens next?</h4>
+                <p class="info-text">Once you confirm, your anonymized data will be securely stored and made available to the marketplace. You'll earn 100 points immediately, which you can redeem for rewards.</p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="action-btn cancel-btn" onclick="cancelSharing()">
+                    <i class="fas fa-times"></i>
+                    Cancel
+                </button>
+                <button class="action-btn confirm-btn" onclick="confirmSharing()">
+                    <i class="fas fa-check"></i>
+                    Confirm & Share Data
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function cancelSharing() {
+            if (confirm('Are you sure you want to cancel data sharing?')) {
+                window.location.href = 'upload.html';
+            }
+        }
+
+        function confirmSharing() {
+            alert('Data sharing confirmed! You earned 100 points.');
+            window.location.href = 'after_upload.html';
+        }
+    </script>
+</body>
+</html>

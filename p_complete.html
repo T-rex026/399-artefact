@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="filename" content="payment-success.html">
+    <title>Payment Success - Plant My Data</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f8fafc;
+            color: #374151;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 50rem;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header {
+            background-color: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1rem 0;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #059669;
+            text-decoration: none;
+        }
+
+        .logo i {
+            font-size: 1.5rem;
+        }
+
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: #d1fae5;
+            color: #059669;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .main-content {
+            padding: 4rem 0;
+        }
+
+        .success-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .success-icon {
+            width: 5rem;
+            height: 5rem;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+        }
+
+        .success-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .success-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+
+        .success-subtitle {
+            color: #6b7280;
+            font-size: 1rem;
+        }
+
+        .content-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 1.5rem;
+        }
+
+        .order-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .info-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .info-label {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .info-value {
+            color: #111827;
+            font-weight: 500;
+        }
+
+        .dataset-name {
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .transaction-id {
+            font-family: monospace;
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .total-paid {
+            border-top: 1px solid #e5e7eb;
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+
+        .total-amount {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #7c3aed;
+        }
+
+        .download-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-icon {
+            color: #059669;
+            font-size: 1.25rem;
+        }
+
+        .section-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .section-subtitle {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .download-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .download-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: #f9fafb;
+            border-radius: 0.5rem;
+            border: 1px solid #e5e7eb;
+        }
+
+        .download-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .download-icon {
+            color: #6b7280;
+            font-size: 1rem;
+        }
+
+        .download-label {
+            font-size: 0.9rem;
+            color: #111827;
+        }
+
+        .download-btn {
+            color: #059669;
+            text-decoration: none;
+            font-size: 0.875rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            transition: background-color 0.2s;
+        }
+
+        .download-btn:hover {
+            background-color: #f0fdf4;
+        }
+
+        .access-info {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .access-icon {
+            color: #f59e0b;
+        }
+
+        .access-text {
+            font-size: 0.875rem;
+            color: #92400e;
+        }
+
+        .receipt-notice {
+            background: #f0f9ff;
+            border: 1px solid #0ea5e9;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .receipt-icon {
+            color: #0ea5e9;
+            font-size: 1.25rem;
+            margin-top: 0.125rem;
+        }
+
+        .receipt-content h3 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #0c4a6e;
+            margin-bottom: 0.25rem;
+        }
+
+        .receipt-content p {
+            font-size: 0.875rem;
+            color: #075985;
+            line-height: 1.5;
+        }
+
+        .steps-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .step-number {
+            width: 1.5rem;
+            height: 1.5rem;
+            background-color: #e5e7eb;
+            color: #6b7280;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            flex-shrink: 0;
+            margin-top: 0.125rem;
+        }
+
+        .step-content h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 0.25rem;
+        }
+
+        .step-content p {
+            font-size: 0.875rem;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        .action-button {
+            background: linear-gradient(135deg, #a855f7, #7c3aed);
+            color: white;
+            padding: 0.875rem 2rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+            cursor: pointer;
+            margin-top: 2rem;
+        }
+
+        .action-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 25px rgba(168, 85, 247, 0.3);
+        }
+
+        .support-notice {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .support-text {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .support-link {
+            color: #059669;
+            text-decoration: none;
+        }
+
+        .support-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            html {
+                font-size: 14px;
+            }
+
+            .order-info {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .download-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="buyer_dashboard.html" class="logo">
+                    <i class="fas fa-leaf"></i>
+                    Plant My Data
+                </a>
+                <div class="status-badge">
+                    <i class="fas fa-check-circle"></i>
+                    Payment Success
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="success-header">
+                <div class="success-icon">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h1 class="success-title">Payment Successful!</h1>
+                <p class="success-subtitle">Your dataset purchase has been completed successfully.</p>
+            </div>
+
+            <div class="content-grid">
+                <div class="card">
+                    <h2 class="card-title">Order Details</h2>
+                    
+                    <div class="order-info">
+                        <div class="info-group">
+                            <div class="info-item">
+                                <span class="info-label">Transaction</span>
+                                <span class="info-value transaction-id">#PMD.8N8J7A4FB</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Dataset</span>
+                                <span class="info-value dataset-name">Grocery Shopping Receipts</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Order Date</span>
+                                <span class="info-value">October 23, 2025 at 05:01 PM</span>
+                            </div>
+                        </div>
+                        <div class="info-group">
+                            <div class="info-item">
+                                <span class="info-label">Dataset Price</span>
+                                <span class="info-value">$75.00</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Processing Fee</span>
+                                <span class="info-value">$0.00</span>
+                            </div>
+                            <div class="info-item total-paid">
+                                <span class="info-label">Total Paid</span>
+                                <span class="info-value total-amount">$75.00 USD</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="section-header">
+                        <i class="fas fa-cog section-icon"></i>
+                        <h2 class="section-title">Your Dataset is Ready</h2>
+                    </div>
+                    <p class="section-subtitle">Download your purchased data in multiple formats</p>
+
+                    <div class="download-section">
+                        <div class="download-options">
+                            <div class="download-item">
+                                <div class="download-info">
+                                    <i class="fas fa-file-csv download-icon"></i>
+                                    <span class="download-label">Download as CSV</span>
+                                </div>
+                                <a href="#" class="download-btn">
+                                    <i class="fas fa-download"></i>
+                                </a>
+                            </div>
+                            <div class="download-item">
+                                <div class="download-info">
+                                    <i class="fas fa-code download-icon"></i>
+                                    <span class="download-label">Download as JSON</span>
+                                </div>
+                                <a href="#" class="download-btn">
+                                    <i class="fas fa-download"></i>
+                                </a>
+                            </div>
+                            <div class="download-item">
+                                <div class="download-info">
+                                    <i class="fas fa-file-excel download-icon"></i>
+                                    <span class="download-label">Download as Excel</span>
+                                </div>
+                                <a href="#" class="download-btn">
+                                    <i class="fas fa-download"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="access-info">
+                            <i class="fas fa-calendar-alt access-icon"></i>
+                            <div class="access-text">
+                                <strong>Data Access Valid Until:</strong> November 22, 2025<br>
+                                You can re-download this dataset anytime before the expiration date.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="receipt-notice">
+                        <i class="fas fa-envelope receipt-icon"></i>
+                        <div class="receipt-content">
+                            <h3>Receipt Sent</h3>
+                            <p>A detailed receipt and download instructions have been sent to your email address. Please check your inbox and spam folder.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">What's Next?</h2>
+                    
+                    <div class="steps-list">
+                        <div class="step-item">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Download Your Data</h4>
+                                <p>Choose your preferred format and download the anonymized cohort insights.</p>
+                            </div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Integrate the Insights</h4>
+                                <p>Use the data to improve your business decisions and product development.</p>
+                            </div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Comply with Data Retention</h4>
+                                <p>Remember to delete the data after November 22, 2025 as per the agreement.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="buyer_dashboard.html" class="action-button">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Marketplace
+                </a>
+
+                <div class="support-notice">
+                    <p class="support-text">
+                        Need help? Contact our support team at 
+                        <a href="mailto:support@plantmydata.com" class="support-link">support@plantmydata.com</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

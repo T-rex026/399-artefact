@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="filename" content="role-selection.html">
+    <title>Plant My Data - Choose Your Role</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #fafafa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 90rem;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        .header {
+            padding: 1.5rem 0;
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #2D5A3D;
+            text-decoration: none;
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+            color: #4CAF50;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #666;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #2D5A3D;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 6rem 0;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .welcome-icon {
+            font-size: 4rem;
+            color: #4CAF50;
+            margin-bottom: 2rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .welcome-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2D5A3D;
+            margin-bottom: 1rem;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 40rem;
+            margin: 0 auto;
+        }
+
+        /* Role Selection */
+        .role-selection {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 68rem;
+            margin: 0 auto;
+        }
+
+        .role-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 1.5rem;
+            padding: 3rem 2.5rem;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .role-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: transparent;
+            transition: all 0.4s ease;
+            z-index: 1;
+        }
+
+        .role-card:hover {
+            transform: translateY(-0.5rem);
+            box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.15);
+        }
+
+        /* Seller Card Hover */
+        .seller-card:hover {
+            border-color: #4CAF50;
+            background: linear-gradient(135deg, #f8fff8 0%, #e8f5e8 100%);
+        }
+
+        .seller-card:hover .role-icon {
+            color: #4CAF50;
+            transform: scale(1.1);
+        }
+
+        .seller-card:hover .role-title {
+            color: #2D5A3D;
+        }
+
+        .seller-card:hover .continue-btn {
+            background: #4CAF50;
+            color: white;
+            transform: scale(1.02);
+        }
+
+        .seller-card:hover .feature-icon {
+            color: #4CAF50;
+        }
+
+        /* Buyer Card Hover */
+        .buyer-card:hover {
+            border-color: #9C27B0;
+            background: linear-gradient(135deg, #fdf8ff 0%, #f3e5f5 100%);
+        }
+
+        .buyer-card:hover .role-icon {
+            color: #9C27B0;
+            transform: scale(1.1);
+        }
+
+        .buyer-card:hover .role-title {
+            color: #6A1B9A;
+        }
+
+        .buyer-card:hover .continue-btn {
+            background: #9C27B0;
+            color: white;
+            transform: scale(1.02);
+        }
+
+        .buyer-card:hover .feature-icon {
+            color: #9C27B0;
+        }
+
+        .role-icon {
+            font-size: 3rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+            transition: all 0.4s ease;
+        }
+
+        .role-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 0.5rem;
+            transition: all 0.4s ease;
+        }
+
+        .role-description {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 2.5rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.875rem;
+            font-size: 0.95rem;
+            color: #333;
+        }
+
+        .feature-icon {
+            color: #4CAF50;
+            margin-top: 0.125rem;
+            transition: all 0.4s ease;
+        }
+
+        .continue-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 0.75rem;
+            background: white;
+            color: #333;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .continue-btn:hover {
+            transform: scale(1.02);
+        }
+
+        /* Footer */
+        .footer-text {
+            text-align: center;
+            margin-top: 3rem;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .footer-text a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .footer-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(2rem);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(1rem);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Card entrance animations */
+        .seller-card {
+            animation: slideUp 0.8s ease-out 0.2s both;
+        }
+
+        .buyer-card {
+            animation: slideUp 0.8s ease-out 0.4s both;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .role-selection {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                max-width: 28rem;
+            }
+
+            .role-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .welcome-title {
+                font-size: 1.5rem;
+            }
+
+            .welcome-subtitle {
+                font-size: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a {
+                font-size: 0.8rem;
+            }
+
+            .main-content {
+                padding: 3rem 0;
+            }
+
+            .welcome-section {
+                margin-bottom: 2rem;
+            }
+        }
+
+        /* Loading states */
+        .role-card.loading {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .role-card.loading .continue-btn {
+            position: relative;
+            color: transparent;
+        }
+
+        .role-card.loading .continue-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 2px solid transparent;
+            border-top: 2px solid currentColor;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="home.html" class="logo">
+                    <i class="fas fa-seedling"></i>
+                    Plant My Data
+                </a>
+                <ul class="nav-links">
+                    <li><a href="policy.html">Privacy</a></li>
+                    <li><a href="how.html">How it works</a></li>
+                    <li><a href="home.html">Back to Home</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Welcome Section -->
+            <div class="welcome-section">
+                <div class="welcome-icon">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <h1 class="welcome-title">Welcome to Plant My Data</h1>
+                <p class="welcome-subtitle">
+                    Choose how you'd like to participate in our data sovereignty platform
+                </p>
+            </div>
+
+            <!-- Role Selection -->
+            <div class="role-selection">
+                <!-- Data Owner (Seller) Card -->
+                <div class="role-card seller-card" onclick="selectRole('seller')">
+                    <div class="role-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h2 class="role-title">I'm a Data Owner (Seller)</h2>
+                    <p class="role-description">
+                        Share your data on your terms and earn rewards
+                    </p>
+                    <ul class="features-list">
+                        <li class="feature-item">
+                            <i class="fas fa-check feature-icon"></i>
+                            <span>Sell your data with granular consent control</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-check feature-icon"></i>
+                            <span>Earn points and rewards for every data share</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-check feature-icon"></i>
+                            <span>Grow your plant as you contribute data</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-check feature-icon"></i>
+                            <span>Full transparency on who buys your data</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-check feature-icon"></i>
+                            <span>Local-first storage keeps your data private</span>
+                        </li>
+                    </ul>
+                    <button class="continue-btn" type="button">
+                        <span>Continue as Data Seller</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Business (Buyer) Card -->
+                <div class="role-card buyer-card" onclick="selectRole('buyer')">
+                    <div class="role-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h2 class="role-title">I'm a Business (Buyer)</h2>
+                    <p class="role-description">
+                        Purchase privacy-first insights from consenting data owners
+                    </p>
+                    <ul class="features-list">
+                        <li class="feature-item">
+                            <i class="fas fa-check feature-icon"></i>
+                            <span>Purchase anonymized cohort insights only</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-check feature-icon"></i>
+                            <span>Bid for access to specific data segments</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-check feature-icon"></i>
+                            <span>Comply with privacy regulations automatically</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-check feature-icon"></i>
+                            <span>Transparent pricing and data retention policies</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-check feature-icon"></i>
+                            <span>Build trust with privacy-conscious consumers</span>
+                        </li>
+                    </ul>
+                    <button class="continue-btn" type="button">
+                        <span>Continue as Data Buyer</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer-text">
+                By continuing, you agree to our <a href="term.html">Terms of Service</a> and <a href="policy.html">Privacy Policy</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Role selection function with navigation
+        function selectRole(role) {
+            const card = document.querySelector(`.${role}-card`);
+            const button = card.querySelector('.continue-btn');
+            
+            // Add loading state
+            card.classList.add('loading');
+            
+            // Simulate loading and navigate
+            setTimeout(() => {
+                if (role === 'seller') {
+                    // Navigate to seller login page
+                    window.location.href = 'login_seller.html';
+                } else if (role === 'buyer') {
+                    // Navigate to buyer login page
+                    window.location.href = 'login_buyer.html';
+                }
+            }, 1000);
+        }
+
+        // Enhanced card interactions
+        document.querySelectorAll('.role-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-0.5rem) scale(1.02)';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                if (!this.classList.contains('loading')) {
+                    this.style.transform = 'translateY(0) scale(1)';
+                }
+            });
+        });
+
+        // Keyboard navigation support
+        document.addEventListener('keydown', function(event) {
+            if (event.key === '1' || event.key === 'ArrowLeft') {
+                event.preventDefault();
+                selectRole('seller');
+            } else if (event.key === '2' || event.key === 'ArrowRight') {
+                event.preventDefault();
+                selectRole('buyer');
+            }
+        });
+
+        // Add entrance animation to cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.role-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(2rem)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.8s ease-out';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 200 + index * 200);
+            });
+        });
+
+        // Add subtle parallax effect on scroll
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const welcomeIcon = document.querySelector('.welcome-icon');
+            
+            if (welcomeIcon) {
+                welcomeIcon.style.transform = `translateY(${scrolled * 0.1}px)`;
+            }
+        });
+
+        // Add click ripple effect
+        function createRipple(event) {
+            const button = event.currentTarget;
+            const ripple = document.createElement('span');
+            const rect = button.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = event.clientX - rect.left - size / 2;
+            const y = event.clientY - rect.top - size / 2;
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.classList.add('ripple');
+            
+            // Add ripple styles
+            ripple.style.position = 'absolute';
+            ripple.style.borderRadius = '50%';
+            ripple.style.background = 'rgba(255, 255, 255, 0.6)';
+            ripple.style.transform = 'scale(0)';
+            ripple.style.animation = 'ripple 0.6s linear';
+            ripple.style.pointerEvents = 'none';
+            
+            button.style.position = 'relative';
+            button.style.overflow = 'hidden';
+            button.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        }
+
+        // Add ripple effect to buttons
+        document.querySelectorAll('.continue-btn').forEach(btn => {
+            btn.addEventListener('click', createRipple);
+        });
+
+        // Add CSS for ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

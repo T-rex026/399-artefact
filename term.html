@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="filename" content="terms-conditions.html">
+    <title>Terms & Conditions - Plant My Data</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #fafafa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90rem;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header {
+            background-color: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1rem 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #059669;
+            text-decoration: none;
+        }
+
+        .logo i {
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #374151;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #059669;
+        }
+
+        .main-content {
+            background-color: white;
+            margin: 2rem auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .page-header {
+            text-align: center;
+            padding: 3rem 2rem 2rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+
+        .last-updated {
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+
+        .terms-content {
+            padding: 2rem;
+            max-width: 50rem;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 1rem;
+        }
+
+        .subsection-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .terms-text {
+            color: #6b7280;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+        }
+
+        .terms-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .terms-list li {
+            color: #6b7280;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .terms-list li:before {
+            content: "•";
+            color: #9ca3af;
+            position: absolute;
+            left: 0;
+        }
+
+        .highlight {
+            color: #111827;
+            font-weight: 600;
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid #e5e7eb;
+            margin: 2rem 0;
+        }
+
+        .actions-section {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid #e5e7eb;
+            background-color: #f9fafb;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: #059669;
+            color: white;
+            border-color: #059669;
+        }
+
+        .btn-primary:hover {
+            background-color: #047857;
+            border-color: #047857;
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: #374151;
+            border-color: #d1d5db;
+        }
+
+        .btn-secondary:hover {
+            background-color: #f9fafb;
+            border-color: #9ca3af;
+        }
+
+        @media (max-width: 1200px) {
+            .container {
+                width: 100%;
+                max-width: 75rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            html {
+                font-size: 14px;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .terms-content {
+                padding: 1.5rem;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 20rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="home.html" class="logo">
+                    <i class="fas fa-leaf"></i>
+                    Plant My Data
+                </a>
+                <nav class="nav-links">
+                    <a href="policy.html">Privacy Policy</a>
+                    <a href="home.html">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Home
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="page-header">
+            <h1 class="page-title">Terms & Conditions</h1>
+            <p class="last-updated">Last updated: October 23, 2025</p>
+        </div>
+
+        <div class="terms-content">
+            <section class="section">
+                <h2 class="section-title">1. Acceptance of Terms</h2>
+                <p class="terms-text">
+                    By accessing and using Plant My Data's services, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
+                </p>
+                <p class="terms-text">
+                    These Terms of Service constitute a legally binding agreement made between you, whether personally or on behalf of an entity ("you") and Plant My Data ("Company", "we", "us", or "our"), concerning your access to and use of our data sovereignty platform.
+                </p>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">2. Definitions</h2>
+                <div class="subsection-title">Key Terms</div>
+                <ul class="terms-list">
+                    <li><span class="highlight">Service</span>: The Plant My Data platform and all related services</li>
+                    <li><span class="highlight">Personal Data</span>: Any information relating to an identified or identifiable individual</li>
+                    <li><span class="highlight">Data Sovereignty</span>: Your right to control and monetize your personal data</li>
+                    <li><span class="highlight">Account</span>: Your registered user account on our platform</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">3. Account Registration and Eligibility</h2>
+                <p class="terms-text">
+                    To access certain features of our Service, you must register for an account. You agree to provide accurate, current, and complete information during the registration process.
+                </p>
+                <div class="subsection-title">3.1 Eligibility Requirements</div>
+                <ul class="terms-list">
+                    <li>You must be at least 18 years of age</li>
+                    <li>You must provide valid contact information</li>
+                    <li>You must not be prohibited from using our services under applicable law</li>
+                    <li>You must agree to these Terms and our Privacy Policy</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">4. Data Ownership and Control</h2>
+                <p class="terms-text">
+                    <span class="highlight">You retain full ownership of your personal data.</span> Our platform is designed to give you complete control over how your data is collected, processed, and monetized.
+                </p>
+                <div class="subsection-title">4.1 Your Rights</div>
+                <ul class="terms-list">
+                    <li>Right to access your data at any time</li>
+                    <li>Right to control data sharing permissions</li>
+                    <li>Right to revoke access to third parties</li>
+                    <li>Right to delete your data permanently</li>
+                    <li>Right to export your data in a portable format</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">5. Data Processing and Sharing</h2>
+                <p class="terms-text">
+                    We process your data using local-first storage. Data sharing only occurs with your explicit consent and in aggregated, anonymized formats that protect your individual privacy.
+                </p>
+                <div class="subsection-title">5.1 Data Processing Principles</div>
+                <ul class="terms-list">
+                    <li>Local storage prioritized over cloud processing</li>
+                    <li>Explicit consent required for all data sharing</li>
+                    <li>Anonymization applied to all shared datasets</li>
+                    <li>Transparent reporting on data usage</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">6. User Conduct and Responsibilities</h2>
+                <p class="terms-text">
+                    You are responsible for your conduct while using our Service and for the data you choose to share through our platform.
+                </p>
+                <div class="subsection-title">6.1 Prohibited Activities</div>
+                <ul class="terms-list">
+                    <li>Attempting to access other users' data without permission</li>
+                    <li>Using the Service for illegal or harmful purposes</li>
+                    <li>Interfering with the security or integrity of the platform</li>
+                    <li>Sharing false or misleading information</li>
+                    <li>Violating any applicable laws or regulations</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">7. Data Monetization</h2>
+                <p class="terms-text">
+                    Our platform enables you to monetize your data through partnerships with businesses seeking consumer insights. All monetization activities are subject to your explicit approval.
+                </p>
+                <div class="subsection-title">7.1 Revenue Sharing</div>
+                <ul class="terms-list">
+                    <li>Transparent fee structure for all transactions</li>
+                    <li>Direct payment to your designated account</li>
+                    <li>Detailed reporting on earnings and data usage</li>
+                    <li>Ability to set minimum compensation thresholds</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">8. Privacy and Security</h2>
+                <p class="terms-text">
+                    We implement industry-standard security measures to protect your data. For detailed information about our privacy practices, please refer to our Privacy Policy.
+                </p>
+                <div class="subsection-title">8.1 Security Measures</div>
+                <ul class="terms-list">
+                    <li>End-to-end encryption for sensitive data</li>
+                    <li>Regular security audits and assessments</li>
+                    <li>Multi-factor authentication options</li>
+                    <li>Secure data transmission protocols</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">9. Limitation of Liability</h2>
+                <p class="terms-text">
+                    To the maximum extent permitted by law, Plant My Data shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of the Service.
+                </p>
+                <p class="terms-text">
+                    Our total liability to you for any damages arising from or related to this agreement shall not exceed the amount you have paid to us in the twelve months preceding the claim.
+                </p>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">10. Termination</h2>
+                <p class="terms-text">
+                    You may terminate your account at any time by following the account closure process in your dashboard. We may terminate or suspend your account for violations of these Terms.
+                </p>
+                <div class="subsection-title">10.1 Effect of Termination</div>
+                <ul class="terms-list">
+                    <li>Immediate cessation of Service access</li>
+                    <li>Data deletion according to your preferences</li>
+                    <li>Settlement of any outstanding payments</li>
+                    <li>Revocation of all data sharing permissions</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">11. Changes to Terms</h2>
+                <p class="terms-text">
+                    We reserve the right to modify these Terms at any time. We will notify you of significant changes via email or through the platform. Continued use of the Service after changes constitutes acceptance of the new Terms.
+                </p>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">12. Governing Law</h2>
+                <p class="terms-text">
+                    These Terms shall be governed by and construed in accordance with the laws of [Jurisdiction], without regard to its conflict of law provisions. Any disputes arising from these Terms shall be resolved through binding arbitration.
+                </p>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">13. Contact Information</h2>
+                <p class="terms-text">
+                    If you have any questions about these Terms & Conditions, please contact us at:
+                </p>
+                <ul class="terms-list">
+                    <li>Email: legal@plantmydata.com</li>
+                    <li>Address: PlantMyData, PrivateOffice, Auckland, New Zealand</li>
+                    <li>Phone: 123-45678910</li>
+                </ul>
+            </section>
+        </div>
+
+        <div class="actions-section">
+            <div class="btn-group">
+                <a href="home.html" class="btn btn-primary">Get Started</a>
+                <a href="policy.html" class="btn btn-secondary">View Privacy Policy</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

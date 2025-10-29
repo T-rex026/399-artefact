@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="filename" content="e_survey.html">
+    <title>Grocery Shopping Survey - Consumer Preferences</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 75rem;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: white;
+            border-bottom: 1px solid #e9ecef;
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #28a745;
+        }
+
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: none;
+            border: 1px solid #dee2e6;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            color: #6c757d;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+
+        .survey-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .survey-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 0.5rem;
+        }
+
+        .survey-subtitle {
+            font-size: 1.125rem;
+            color: #6c757d;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #6c757d;
+            text-decoration: none;
+            margin-bottom: 2rem;
+            font-size: 0.875rem;
+        }
+
+        .survey-card {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .survey-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .survey-icon {
+            width: 3rem;
+            height: 3rem;
+            background: #e8f5e8;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #28a745;
+        }
+
+        .survey-details h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .survey-description {
+            color: #6c757d;
+            font-size: 0.875rem;
+        }
+
+        .survey-meta {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            color: #6c757d;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .points-badge {
+            background: #d4edda;
+            color: #155724;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: auto;
+        }
+
+        .questions-section {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            color: #6c757d;
+            margin-bottom: 2rem;
+        }
+
+        .question {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #f1f3f4;
+        }
+
+        .question:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .question-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #212529;
+        }
+
+        .mcq-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .option input[type="radio"] {
+            opacity: 0;
+            position: absolute;
+        }
+
+        .radio-dot {
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 2px solid #dee2e6;
+            border-radius: 50%;
+            margin-right: 1rem;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .radio-dot::after {
+            content: '';
+            width: 0.625rem;
+            height: 0.625rem;
+            background: #28a745;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.2s ease;
+        }
+
+        .option:hover .radio-dot {
+            border-color: #28a745;
+        }
+
+        .option input[type="radio"]:checked + .radio-dot {
+            border-color: #28a745;
+        }
+
+        .option input[type="radio"]:checked + .radio-dot::after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .option-text {
+            font-size: 1rem;
+            color: #495057;
+        }
+
+        .text-input, .textarea-input, .select-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #dee2e6;
+            border-radius: 0.375rem;
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .text-input:focus, .textarea-input:focus, .select-input:focus {
+            outline: none;
+            border-color: #28a745;
+            box-shadow: 0 0 0 0.125rem rgba(40, 167, 69, 0.25);
+        }
+
+        .textarea-input {
+            resize: vertical;
+            min-height: 6rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .checkbox-option input[type="checkbox"] {
+            width: 1.125rem;
+            height: 1.125rem;
+            accent-color: #28a745;
+        }
+
+        .submit-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 0.875rem 2rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            margin-top: 2rem;
+        }
+
+        .submit-btn:hover {
+            background: #218838;
+        }
+
+        @media (max-width: 48rem) {
+            .container {
+                padding: 1rem;
+            }
+
+            .survey-title {
+                font-size: 2rem;
+            }
+
+            .survey-card, .questions-section {
+                padding: 1.5rem;
+            }
+
+            .survey-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <i class="fas fa-leaf"></i>
+            Plant My Data
+        </div>
+        <button class="logout-btn" >
+            <a href="home.html">
+            <i class="fas fa-sign-out-alt"></i>
+            Log out
+            </a>
+        </button>
+    </div>
+
+    <div class="container">
+        <div class="survey-header">
+            <h1 class="survey-title">Shopping Preferences & Habits</h1>
+            <p class="survey-subtitle">Help retailers understand consumer behavior</p>
+        </div>
+
+        <a href="survey.html" class="back-link">
+            <i class="fas fa-chevron-left"></i>
+            Back to Surveys
+        </a>
+
+        <div class="survey-card">
+            <div class="survey-info">
+                <div class="survey-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <div class="survey-details">
+                    <h3>Shopping Preferences & Habits</h3>
+                    <p class="survey-description">Share your shopping habits to help retailers provide better experiences</p>
+                    <div class="survey-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            ~8 minutes
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-question-circle"></i>
+                            11 questions
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-coins"></i>
+                            100 points reward
+                        </div>
+                    </div>
+                </div>
+                <div class="points-badge">+100 points</div>
+            </div>
+        </div>
+
+        <div class="questions-section">
+            <h2 class="section-title">Survey Questions</h2>
+            <p class="section-subtitle">Please answer all questions below</p>
+
+            <div class="question">
+                <h3 class="question-title">1. How often do you go grocery shopping?</h3>
+                <div class="mcq-options">
+                    <label class="option">
+                        <input type="radio" name="q1" value="daily">
+                        <div class="radio-dot"></div>
+                        <span class="option-text">Daily</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="2-3-times">
+                        <div class="radio-dot"></div>
+                        <span class="option-text">2-3 times per week</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="once-week">
+                        <div class="radio-dot"></div>
+                        <span class="option-text">Once a week</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="two-weeks">
+                        <div class="radio-dot"></div>
+                        <span class="option-text">Every two weeks</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="once-month">
+                        <div class="radio-dot"></div>
+                        <span class="option-text">Once a month</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question">
+                <h3 class="question-title">2. Which stores do you shop at most frequently? (Select all that apply)</h3>
+                <div class="checkbox-group">
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="stores" value="paksave">
+                        <span>PakSave</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="stores" value="countdown">
+                        <span>Countdown</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="stores" value="newworld">
+                        <span>New World</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="stores" value="freshchoice">
+                        <span>Fresh Choice</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="stores" value="foursquare">
+                        <span>Four Square</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="stores" value="online">
+                        <span>Online grocery delivery</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question">
+                <h3 class="question-title">3. What is your average weekly grocery spending?</h3>
+                <div class="mcq-options">
+                    <label class="option">
+                        <input type="radio" name="q3" value="0-50">
+                        <div class="radio-dot"></div>
+                        <span class="option-text">$0-$50</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q3" value="51-100">
+                        <div class="radio-dot"></div>
+                        <span class="option-text">$51-$100</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q3" value="101-150">
+                        <div class="radio-dot"></div>
+                        <span class="option-text">$101-$150</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q3" value="151-200">
+                        <div class="radio-dot"></div>
+                        <span class="option-text">$151-$200</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q3" value="200+">
+                        <div class="radio-dot"></div>
+                        <span class="option-text">$200+</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question">
+                <h3 class="question-title">4. How do you prefer to shop for groceries?</h3>
+                <select class="select-input">
+                    <option value="">Select preference</option>
+                    <option value="in-store">In-store only</option>
+                    <option value="online">Online only</option>
+                    <option value="both">Both in-store and online</option>
+                    <option value="click-collect">Click & collect</option>
+                </select>
+            </div>
+
+            <div class="question">
+                <h3 class="question-title">5. What is your preferred payment method?</h3>
+                <select class="select-input">
+                    <option value="">Select payment method</option>
+                    <option value="credit">Credit card</option>
+                    <option value="debit">Debit card</option>
+                    <option value="cash">Cash</option>
+                    <option value="mobile">Mobile wallet (Apple Pay, Google Pay)</option>
+                    <option value="bnpl">Buy now, pay later</option>
+                </select>
+            </div>
+
+            <div class="question">
+                <h3 class="question-title">6. What factors are most important when choosing where to shop? (Select all that apply)</h3>
+                <div class="checkbox-group">
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="factors" value="price">
+                        <span>Price</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="factors" value="quality">
+                        <span>Quality</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="factors" value="convenience">
+                        <span>Convenience</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="factors" value="variety">
+                        <span>Product variety</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="factors" value="brands">
+                        <span>Brand availability</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="factors" value="cleanliness">
+                        <span>Store cleanliness</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="factors" value="service">
+                        <span>Customer service</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="factors" value="rewards">
+                        <span>Loyalty rewards</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question">
+                <h3 class="question-title">7. How often do you shop online for groceries?</h3>
+                <select class="select-input">
+                    <option value="">Select frequency</option>
+                    <option value="always">Always</option>
+                    <option value="often">Often (2-3 times per month)</option>
+                    <option value="sometimes">Sometimes (once a month)</option>
+                    <option value="rarely">Rarely</option>
+                    <option value="never">Never</option>
+                </select>
+            </div>
+
+            <div class="question">
+                <h3 class="question-title">8. Do you participate in store loyalty programs?</h3>
+                <select class="select-input">
+                    <option value="">Select option</option>
+                    <option value="multiple">Yes, multiple programs</option>
+                    <option value="one">Yes, one program</option>
+                    <option value="no">No</option>
+                    <option value="unaware">Not aware of any</option>
+                </select>
+            </div>
+
+            <div class="question">
+                <h3 class="question-title">9. How important is sustainability when making shopping decisions?</h3>
+                <select class="select-input">
+                    <option value="">Select importance level</option>
+                    <option value="very">Very important</option>
+                    <option value="somewhat">Somewhat important</option>
+                    <option value="neutral">Neutral</option>
+                    <option value="not-very">Not very important</option>
+                    <option value="not-at-all">Not important at all</option>
+                </select>
+            </div>
+
+            <div class="question">
+                <h3 class="question-title">10. Which product categories do you buy most often? (Select all that apply)</h3>
+                <div class="checkbox-group">
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="categories" value="produce">
+                        <span>Fresh produce</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="categories" value="meat">
+                        <span>Meat & seafood</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="categories" value="dairy">
+                        <span>Dairy products</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="categories" value="bakery">
+                        <span>Bakery items</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="categories" value="frozen">
+                        <span>Frozen foods</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="categories" value="canned">
+                        <span>Canned goods</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="categories" value="snacks">
+                        <span>Snacks</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="categories" value="beverages">
+                        <span>Beverages</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="categories" value="personal">
+                        <span>Personal care</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="categories" value="household">
+                        <span>Household items</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question">
+                <h3 class="question-title">11. Any additional comments about your shopping preferences or experiences?</h3>
+                <textarea class="textarea-input" placeholder="Share any thoughts, suggestions, or experiences you'd like retailers to know about..."></textarea>
+            </div>
+
+            <a href="After_survey.html" class="submit-btn">Submit Survey</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const radioOptions = document.querySelectorAll('.option input[type="radio"]');
+            radioOptions.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    const groupName = this.name;
+                    const otherRadios = document.querySelectorAll(`input[name="${groupName}"]`);
+                    otherRadios.forEach(otherRadio => {
+                        if (otherRadio !== this) {
+                            otherRadio.checked = false;
+                        }
+                    });
+                });
+            });
+
+            const submitBtn = document.querySelector('.submit-btn');
+            submitBtn.addEventListener('click', function() {
+                alert('Thank you for completing the survey! Your responses have been recorded.');
+            });
+        });
+    </script>
+</body>
+</html>
